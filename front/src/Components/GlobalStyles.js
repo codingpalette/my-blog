@@ -5,7 +5,7 @@ const GlobalStyles = createGlobalStyle`
   @font-face { font-family: 'RIDIBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
   html{font-size:16px;}
   body{}
-  body *{font-family:RIDIBatang; color:#333;}
+  body *{font-family:RIDIBatang;}
   a{text-decoration:none;}
   button{background:none; border:none; outline:none; cursor:pointer; padding:0;}
   .max_box{max-width:1230px; margin:0 auto; padding:0 15px; box-sizing:border-box;}
@@ -15,12 +15,14 @@ const GlobalStyles = createGlobalStyle`
     body {
       background: #000;
     }
+    body *{color:#ddd;}
   }
 
   @media (prefers-color-scheme: light) {
     body {
       background:#fafafa;
     }
+    body *{color:#555;}
   }
   
 
