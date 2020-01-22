@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
-const ListUl = styled.ul`
-  li {
-    margin-bottom: 15px;
-  }
+const ListBox = styled.div`
+  margin-bottom: 15px;
 `;
 
 const TitleLink = styled(Link)`
@@ -35,8 +33,8 @@ const TextBox = styled.div`
 const HomeList = ({ title, link, date, text }) => {
   return (
     <>
-      <ListUl>
-        <li className="content_box">
+      <ListBox className="content_box">
+        <div>
           <h2>
             <TitleLink to={link}>{title}</TitleLink>
           </h2>
@@ -48,8 +46,8 @@ const HomeList = ({ title, link, date, text }) => {
           </CreateDate>
 
           <TextBox>{text}</TextBox>
-        </li>
-      </ListUl>
+        </div>
+      </ListBox>
     </>
   );
 };
