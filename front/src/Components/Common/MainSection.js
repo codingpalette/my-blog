@@ -17,6 +17,9 @@ const Section = styled.div`
 
 const Content = styled.div`
   width: calc(100% - 255px);
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const MainSection = ({ children }) => {
