@@ -32,26 +32,22 @@ const TextBox = styled.div`
   font-size: 14px;
 `;
 
-const HomeList = () => {
+const HomeList = ({ title, link, date, text }) => {
   return (
     <>
       <ListUl>
         <li className="content_box">
           <h2>
-            <TitleLink to="/">HTML 기술에 대해서</TitleLink>
+            <TitleLink to={link}>{title}</TitleLink>
           </h2>
           <CreateDate>
             <FontAwesomeIcon icon={faCalendar} />
             <p>
-              작성일 <span>2020-12-20</span>
+              작성일 <span>{date}</span>
             </p>
           </CreateDate>
 
-          <TextBox>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown...
-          </TextBox>
+          <TextBox>{text}</TextBox>
         </li>
       </ListUl>
     </>

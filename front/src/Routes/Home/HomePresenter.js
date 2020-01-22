@@ -3,12 +3,22 @@ import Header from '../../Components/Common/Header';
 import MainSection from '../../Components/Common/MainSection';
 import HomeList from '../../Components/Home/HomeList';
 
-const HomePresenter = () => {
+const HomePresenter = ({ listData }) => {
   return (
     <>
       <Header />
       <MainSection>
-        <HomeList />
+        {listData &&
+          listData.length > 0 &&
+          listData.map(item => (
+            <HomeList
+              key={item.id}
+              title={item.title}
+              link={item.link}
+              date={item.date}
+              text={item.text}
+            />
+          ))}
       </MainSection>
     </>
   );
