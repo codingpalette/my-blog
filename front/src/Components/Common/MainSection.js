@@ -4,8 +4,10 @@ import Aside from './Aside';
 
 const Section = styled.div`
   margin-top: 15px;
+  margin-bottom: 15px;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
   flex-direction: row-reverse;
   @media screen and (max-width: 768px) {

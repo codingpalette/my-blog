@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 const HeaderBox = styled.header`
   width: 100%;
   height: 50px;
-  position: relative;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 1000;
   @media (prefers-color-scheme: dark) {
     background-color: #1f2023;
   }

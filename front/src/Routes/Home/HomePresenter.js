@@ -6,7 +6,48 @@ const HomePresenter = () => {
   return (
     <>
       <Header />
-      <MainSection>sdfsdfds</MainSection>
+      <MainSection>
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+        1 <br />1 <br />1 <br />
+      </MainSection>
     </>
   );
 };
