@@ -5,8 +5,14 @@ import { Link } from 'react-router-dom';
 const HeaderBox = styled.header`
   width: 100%;
   height: 50px;
-  background-color: #6c63ff;
   position: relative;
+  @media (prefers-color-scheme: dark) {
+    background-color: #1f2023;
+  }
+
+  @media (prefers-color-scheme: light) {
+    background-color: #6c63ff;
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -19,16 +25,16 @@ const HeaderContent = styled.div`
 `;
 
 const HeaderNav = styled.nav`
+  transition: 0.3s;
+  overflow-y: hidden;
   ul {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
   }
-  ul li {
-    padding: 0 10px;
-  }
   ul li a {
     color: #fff;
+    padding: 0 10px;
     transition: color 0.2s;
   }
   ul li a:hover {
@@ -40,13 +46,20 @@ const HeaderNav = styled.nav`
     top: 50px;
     width: 100%;
     background-color: #6c63ff;
+    max-height: 0;
+    &.active {
+      max-height: 100px;
+    }
     ul li {
       width: 100%;
     }
     ul li a {
       display: block;
-      padding: 10px 0;
+      padding: 10px;
     }
+  }
+  @media screen and (max-width: 768px) and (prefers-color-scheme: dark) {
+    background-color: #1f2023;
   }
 `;
 
@@ -64,8 +77,8 @@ const HeaderNavBtn = styled.button`
     width: 100%;
     height: 2px;
     background-color: #fff;
+    transition: 0.3s;
   }
-  ${props => console.log(props)}
   .line1 {
     top: 0;
     transform: translate(-50%);
@@ -77,6 +90,19 @@ const HeaderNavBtn = styled.button`
   .line3 {
     top: 100%;
     transform: translate(-50%, -100%);
+  }
+  &.active {
+    .line1 {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    .line2 {
+      opacity: 0;
+    }
+    .line3 {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
   }
   @media screen and (max-width: 768px) {
     display: block;
@@ -96,7 +122,7 @@ const Header = () => {
           <h1>
             <Link to="/">로고</Link>
           </h1>
-          <HeaderNav>
+          <HeaderNav className={active}>
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -106,7 +132,7 @@ const Header = () => {
               </li>
             </ul>
           </HeaderNav>
-          <HeaderNavBtn active={active} onClick={NavBtnClick}>
+          <HeaderNavBtn className={active} onClick={NavBtnClick}>
             <span className="line1"></span>
             <span className="line2"></span>
             <span className="line3"></span>
