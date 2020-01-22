@@ -1,52 +1,14 @@
 import React from 'react';
 import Header from '../../Components/Common/Header';
 import MainSection from '../../Components/Common/MainSection';
+import HomeList from '../../Components/Home/HomeList';
 
 const HomePresenter = () => {
   return (
     <>
       <Header />
       <MainSection>
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
-        1 <br />1 <br />1 <br />
+        <HomeList />
       </MainSection>
     </>
   );
