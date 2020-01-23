@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Aside from './Aside';
+import Aside from '../Components/Common/Aside';
 
 const Section = styled.div`
   margin-top: 15px;
@@ -22,7 +22,7 @@ const Content = styled.div`
   }
 `;
 
-const MainSection = ({ children }) => {
+const MainLayout = ({ children }) => {
   return (
     <>
       <Section className="max_box">
@@ -33,4 +33,4 @@ const MainSection = ({ children }) => {
   );
 };
 
-export default MainSection;
+export default MainLayout;

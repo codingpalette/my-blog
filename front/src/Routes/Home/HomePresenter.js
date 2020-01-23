@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../../Components/Common/Header';
-import MainSection from '../../Components/Common/MainSection';
+import MainLayout from '../../Layout/MainLayout';
 import HomeList from '../../Components/Home/HomeList';
 
 const HomePresenter = ({ listData }) => {
   return (
     <>
       <Header />
-      <MainSection>
+      <MainLayout>
         {listData &&
           listData.length > 0 &&
           listData.map(item => (
@@ -19,7 +19,7 @@ const HomePresenter = ({ listData }) => {
               text={item.text}
             />
           ))}
-      </MainSection>
+      </MainLayout>
     </>
   );
 };
