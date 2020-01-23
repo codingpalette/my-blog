@@ -9,12 +9,9 @@ const HeaderBox = styled.header`
   left: 0;
   top: 0;
   z-index: 1000;
+  background-color: #6c63ff;
   @media (prefers-color-scheme: dark) {
     background-color: #1f2023;
-  }
-
-  @media (prefers-color-scheme: light) {
-    background-color: #6c63ff;
   }
 `;
 
