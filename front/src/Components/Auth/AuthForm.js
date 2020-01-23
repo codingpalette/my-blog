@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Button from '../Common/Button';
 
 const FormContainer = styled.div`
@@ -26,7 +26,7 @@ const Input = styled.input`
   }
 `;
 
-const AuthForm = () => {
+const AuthForm = ({ location: { pathname } }) => {
   return (
     <>
       <FormContainer className="content_box">
@@ -36,16 +36,29 @@ const AuthForm = () => {
         <form>
           <Input type="text" placeholder="아이디" />
           <Input type="password" placeholder="비밀번호" />
+          {pathname === '/signup' && (
+            <Input type="password" placeholder="비밀번호 확인" />
+          )}
           <div style={{ textAlign: 'right' }}>
-            <Button to={'/signup'}>회원가입</Button>
+            {pathname === '/login' ? (
+              <Button to={'/signup'}>회원가입</Button>
+            ) : (
+              <Button to={'/login'}>로그인</Button>
+            )}
           </div>
-          <Button fullWidth style={{ marginTop: '10px' }}>
-            로그인
-          </Button>
+          {pathname === '/login' ? (
+            <Button fullWidth style={{ marginTop: '10px' }}>
+              로그인
+            </Button>
+          ) : (
+            <Button fullWidth style={{ marginTop: '10px' }}>
+              회원가입
+            </Button>
+          )}
         </form>
       </FormContainer>
     </>
   );
 };
 
-export default AuthForm;
+export default withRouter(AuthForm);

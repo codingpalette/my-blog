@@ -31,10 +31,7 @@ const StyledLink = styled(Link)`
 
 const Button = props => {
   return (
-    <>
-      {console.log(props)}
-      {props.to ? <StyledLink {...props} /> : <StyledButton {...props} />}
-    </>
+    <>{props.to ? <StyledLink {...props} /> : <StyledButton {...props} />}</>
   );
 };
 
