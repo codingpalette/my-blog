@@ -1,6 +1,6 @@
 // 초깃값 설정
 const initialState = {
-  List: [
+  ListContent: [
     // { id: 1, text: '타입스크립트 배우기', done: true },
     // { id: 2, text: '타입스크립트와 리덕스 함께 사용해보기', done: true },
     // { id: 3, text: '투두리스트 만들기', done: false }
@@ -21,6 +21,10 @@ export const LOAD_TODO_REQUEST = 'LOAD_TODO_REQUEST';
 export const LOAD_TODO_SUCCESS = 'LOAD_TODO_SUCCESS';
 export const LOAD_TODO_FAILURE = 'LOAD_TODO_FAILURE';
 
+export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
+export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
+export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
+
 function todos(state = initialState, action) {
   switch (action.type) {
     case LOAD_TODO_REQUEST:
@@ -31,15 +35,25 @@ function todos(state = initialState, action) {
       return {
         ...state,
         isTodoLoad: false,
-        List: [dummyList, ...state.List],
+        ListContent: dummyList,
       };
-
-    //   case TOGGLE_TODO:
-    //     return state.map(todo =>
-    //       todo.id === action.payload ? { ...todo, done: !todo.done } : todo
-    //     );
-    //   case REMOVE_TODO:
-    //     return state.filter(todo => todo.id !== action.payload);
+    case ADD_TODO_REQUEST:
+      return {
+        ...state,
+      };
+    case ADD_TODO_SUCCESS:
+      const nextId = Math.max(...state.ListContent.map(todo => todo.id)) + 1;
+      return {
+        ...state,
+        ListContent: [
+          ...state.ListContent,
+          {
+            id: nextId,
+            text: action.data,
+            done: false,
+          },
+        ],
+      };
     default:
       return state;
   }

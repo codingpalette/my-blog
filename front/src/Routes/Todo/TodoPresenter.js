@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LOAD_TODO_REQUEST } from '../../modules/todos';
 
 const TodoPresenter = () => {
-  const { List, isTodoLoad } = useSelector(state => state.todos);
+  const { ListContent, isTodoLoad } = useSelector(state => state.todos);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,12 +14,12 @@ const TodoPresenter = () => {
     });
   }, [dispatch]);
 
-  console.log(List);
+  console.log(ListContent);
   return (
     <>
       <TodoLayout />
-      {isTodoLoad ? <div>loading</div> : <div>ok</div>}
-      <div>Sub</div>
+      {/* {isTodoLoad ? <div>loading</div> : <div>ok</div>}
+      <div>Sub</div> */}
     </>
   );
 };
