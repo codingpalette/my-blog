@@ -130,6 +130,9 @@ const Header = () => {
               <li>
                 <Link to="/post">Post</Link>
               </li>
+              <li>
+                <Link to="/todo">todo</Link>
+              </li>
             </ul>
           </HeaderNav>
           <HeaderNavBtn className={active} onClick={NavBtnClick}>
