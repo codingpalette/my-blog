@@ -1,4 +1,5 @@
-import { all, delay, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, delay, fork, call, put, takeLatest } from 'redux-saga/effects';
+import * as firebase from 'firebase/app';
 import {
   LOAD_TODO_REQUEST,
   LOAD_TODO_SUCCESS,
@@ -36,14 +37,23 @@ function* watchLoadPost() {
 
 //////////// Todo 등록 /////////
 
-// function addTodoAPI() {
-
-// }
+function addTodoAPI(value) {
+  // console.log(value);
+  return firebase
+    .firestore()
+    .collection('todo')
+    .add({
+      text: value,
+    });
+}
 
 function* addTodo(action) {
   try {
     // yield delay(2000);
     // console.log(action.data.value)
+    const result = yield call(addTodoAPI, action.data);
+    console.log(result);
+
     yield put({
       type: ADD_TODO_SUCCESS,
       data: action.data.value,
