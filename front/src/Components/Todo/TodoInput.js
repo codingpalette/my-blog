@@ -37,6 +37,7 @@ const TodoInput = () => {
       type: ADD_TODO_REQUEST,
       data: { value },
     });
+    setValue('');
   };
 
   useEffect(() => {

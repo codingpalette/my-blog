@@ -6,6 +6,9 @@ import {
   ADD_TODO_REQUEST,
   ADD_TODO_SUCCESS,
   ADD_TODO_FAILURE,
+  DEL_TODO_REQUEST,
+  DEL_TODO_FAILURE,
+  DEL_TODO_SUCCESS,
 } from '../modules/todos';
 
 // function loadPostAPI() {
@@ -57,6 +60,32 @@ function* watchAddTodo() {
   yield takeLatest(ADD_TODO_REQUEST, addTodo);
 }
 
+// function delTodoAPI() {
+
+// }
+
+function* delTodo(action) {
+  try {
+    // yield delay(2000);
+    // console.log(action.data.value)
+    // const result = yield call(delTodoAPI);
+    // console.log(action.data);
+    yield put({
+      type: DEL_TODO_SUCCESS,
+      data: action.data,
+    });
+  } catch (e) {
+    yield put({
+      type: DEL_TODO_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* watchDelTodo() {
+  yield takeLatest(DEL_TODO_REQUEST, delTodo);
+}
+
 export default function* postSaga() {
-  yield all([fork(watchLoadPost), fork(watchAddTodo)]);
+  yield all([fork(watchLoadPost), fork(watchAddTodo), fork(watchDelTodo)]);
 }

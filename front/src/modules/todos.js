@@ -25,6 +25,10 @@ export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
 export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
 export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
 
+export const DEL_TODO_REQUEST = 'DEL_TODO_REQUEST';
+export const DEL_TODO_SUCCESS = 'DEL_TODO_SUCCESS';
+export const DEL_TODO_FAILURE = 'DEL_TODO_FAILURE';
+
 function todos(state = initialState, action) {
   switch (action.type) {
     case LOAD_TODO_REQUEST:
@@ -53,6 +57,15 @@ function todos(state = initialState, action) {
             done: false,
           },
         ],
+      };
+    case DEL_TODO_REQUEST:
+      return {
+        ...state,
+      };
+    case DEL_TODO_SUCCESS:
+      return {
+        ...state,
+        ListContent: state.ListContent.filter(todo => todo.id !== action.data),
       };
     default:
       return state;

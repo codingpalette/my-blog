@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { DEL_TODO_REQUEST } from '../../modules/todos';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ListBox = styled.div`
@@ -27,8 +28,16 @@ const ListBox = styled.div`
 
 const TodoList = () => {
   const { ListContent } = useSelector(state => state.todos);
-  console.log(ListContent);
+  // console.log(ListContent);
   const dispatch = useDispatch();
+
+  const delEvent = id => e => {
+    // console.log(id);
+    dispatch({
+      type: DEL_TODO_REQUEST,
+      data: id,
+    });
+  };
   return (
     <>
       <ListBox>
@@ -36,7 +45,9 @@ const TodoList = () => {
           {ListContent.map(list => (
             <li key={list.id}>
               <span>{list.text}</span>
-              <button type="button">삭제</button>
+              <button type="button" onClick={delEvent(list.id)}>
+                삭제
+              </button>
             </li>
           ))}
         </ul>
