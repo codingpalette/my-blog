@@ -12,16 +12,21 @@ import {
   DEL_TODO_SUCCESS,
 } from '../modules/todos';
 
-// function loadPostAPI() {
-
-// }
+function loadPostAPI() {
+  return firebase
+    .firestore()
+    .collection('todo')
+    .get();
+}
 
 function* loadPost() {
   try {
     // yield delay(2000);
-    // console.log('asdasd');
+    const result = yield call(loadPostAPI);
+    // console.log(result);
     yield put({
       type: LOAD_TODO_SUCCESS,
+      data: result,
     });
   } catch (e) {
     yield put({
@@ -51,12 +56,12 @@ function* addTodo(action) {
   try {
     // yield delay(2000);
     // console.log(action.data.value)
-    const result = yield call(addTodoAPI, action.data);
-    console.log(result);
+    const result = yield call(addTodoAPI, action.data.value);
+    const list = [result.id, action.data.value];
 
     yield put({
       type: ADD_TODO_SUCCESS,
-      data: action.data.value,
+      data: list,
     });
   } catch (e) {
     yield put({

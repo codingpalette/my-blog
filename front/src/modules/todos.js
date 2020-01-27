@@ -36,25 +36,33 @@ function todos(state = initialState, action) {
         ...state,
       };
     case LOAD_TODO_SUCCESS:
+      const list = [];
+      action.data.forEach(v => {
+        list.push({
+          id: v.id,
+          text: v.data().text,
+        });
+      });
+
       return {
         ...state,
         isTodoLoad: false,
-        ListContent: dummyList,
+        ListContent: list,
       };
     case ADD_TODO_REQUEST:
       return {
         ...state,
       };
     case ADD_TODO_SUCCESS:
-      const nextId = Math.max(...state.ListContent.map(todo => todo.id)) + 1;
+      // const nextId = Math.max(...state.ListContent.map(todo => todo.id)) + 1;
+      // console.log(action);
       return {
         ...state,
         ListContent: [
           ...state.ListContent,
           {
-            id: nextId,
-            text: action.data,
-            done: false,
+            id: action.data[0],
+            text: action.data[1],
           },
         ],
       };
