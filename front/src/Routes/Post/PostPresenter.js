@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const PostPresenter = () => {
   return (
     <>
-      <div>Post</div>
+      <Suspense fallback={<div>loading...</div>}>
+        <div>post</div>
+      </Suspense>
     </>
   );
 };

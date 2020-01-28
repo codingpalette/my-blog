@@ -1,10 +1,13 @@
-import React from 'react';
-import AuthLayout from '../../Layout/AuthLayout';
+import React, { Suspense, lazy } from 'react';
+// import AuthLayout from '../../Layout/AuthLayout';
+const AuthLayout = lazy(() => import('../../Layout/AuthLayout'));
 
 const LoginPresenter = () => {
   return (
     <>
-      <AuthLayout />
+      <Suspense fallback={<div>loading...</div>}>
+        <AuthLayout />
+      </Suspense>
     </>
   );
 };
