@@ -9,6 +9,8 @@ const buttonStyle = css`
   font-size: 14px;
   line-height: 1;
   display: inline-block;
+  background-color: ${props => (props.color ? props.color : 'transparent')};
+  color: ${props => props.color && '#FFF'};
   ${props =>
     props.fullWidth &&
     css`

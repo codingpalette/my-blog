@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Aside from '../Components/Common/Aside';
+import BtnBox from '../Components/Home/BtnBox';
 
 const Section = styled.div`
   margin-top: 15px;
@@ -26,6 +27,7 @@ const MainLayout = ({ children }) => {
   return (
     <>
       <Section className="max_box">
+        <BtnBox />
         <Content>{children}</Content>
         <Aside />
       </Section>
