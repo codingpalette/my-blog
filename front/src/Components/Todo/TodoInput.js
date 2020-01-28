@@ -38,6 +38,7 @@ const TodoInput = () => {
       data: value,
     });
     setValue('');
+    inputEl.current.focus();
   };
 
   useEffect(() => {

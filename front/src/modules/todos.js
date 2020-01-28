@@ -79,6 +79,9 @@ function todos(state = initialState, action) {
     case UPDATE_TODO_SUCCESS:
       return {
         ...state,
+        ListContent: state.ListContent.map(list =>
+          list.id === action.data ? { ...list, done: !list.done } : list,
+        ),
       };
     case DEL_TODO_REQUEST:
       return {

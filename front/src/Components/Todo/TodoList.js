@@ -28,7 +28,8 @@ const ListBox = styled.div`
 `;
 
 const Text = styled.span`
-  text-decoration: ${props => (props.done ? 'none' : 'line-through')};
+  text-decoration: ${props =>
+    props.done === 'true' ? 'line-through' : 'none'};
 `;
 
 const TodoList = () => {

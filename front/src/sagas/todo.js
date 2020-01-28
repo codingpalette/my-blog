@@ -11,6 +11,8 @@ import {
   DEL_TODO_FAILURE,
   DEL_TODO_SUCCESS,
   UPDATE_TODO_REQUEST,
+  UPDATE_TODO_SUCCESS,
+  UPDATE_TODO_FAILURE,
 } from '../modules/todos';
 
 //////////// Todo 로드 /////////
@@ -81,12 +83,29 @@ function* watchAddTodo() {
 
 //////////// Todo 수정 /////////
 
-function* updateTodoAPI() {}
+function updateTodoAPI(action) {
+  return firebase
+    .firestore()
+    .collection('todo')
+    .doc(action.id)
+    .update({
+      done: action.done === false ? true : false,
+    });
+}
 
 function* updateTodo(action) {
   try {
-    console.log(action);
-  } catch (e) {}
+    yield call(updateTodoAPI, action.data);
+    yield put({
+      type: UPDATE_TODO_SUCCESS,
+      data: action.data.id,
+    });
+  } catch (e) {
+    yield put({
+      type: UPDATE_TODO_FAILURE,
+      error: e,
+    });
+  }
 }
 
 function* watchUpdateTodo() {
