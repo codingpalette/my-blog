@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LOAD_TODO_REQUEST } from '../../modules/todos';
 
 const TodoContainer = () => {
-  const { ListContent, isTodoLoad } = useSelector(state => state.todos);
+  const { isTodoLoad } = useSelector(state => state.todos);
   const dispatch = useDispatch();
 
   useEffect(() => {

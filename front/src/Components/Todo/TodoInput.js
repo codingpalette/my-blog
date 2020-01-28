@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import * as firebase from 'firebase/app';
 
 import { useDispatch } from 'react-redux';
 import { ADD_TODO_REQUEST } from '../../modules/todos';
@@ -36,14 +35,8 @@ const TodoInput = () => {
     e.preventDefault();
     dispatch({
       type: ADD_TODO_REQUEST,
-      data: { value },
+      data: value,
     });
-    // firebase
-    //   .firestore()
-    //   .collection('todo')
-    //   .add({
-    //     text: value,
-    //   });
     setValue('');
   };
 

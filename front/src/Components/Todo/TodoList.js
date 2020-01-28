@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { DEL_TODO_REQUEST } from '../../modules/todos';
+import { DEL_TODO_REQUEST, UPDATE_TODO_REQUEST } from '../../modules/todos';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ListBox = styled.div`
@@ -17,6 +17,7 @@ const ListBox = styled.div`
     flex: 1;
     display: block;
     font-size: 12px;
+    cursor: pointer;
   }
   li button {
     display: block;
@@ -24,6 +25,10 @@ const ListBox = styled.div`
     padding: 10px 5px;
     box-sizing: border-box;
   }
+`;
+
+const Text = styled.span`
+  text-decoration: ${props => (props.done ? 'none' : 'line-through')};
 `;
 
 const TodoList = () => {
@@ -38,20 +43,34 @@ const TodoList = () => {
       data: id,
     });
   };
+
+  const doneEvent = (id, done) => e => {
+    dispatch({
+      type: UPDATE_TODO_REQUEST,
+      data: { id, done },
+    });
+  };
   return (
     <>
-      <ListBox>
-        <ul>
-          {ListContent.map(list => (
-            <li key={list.id}>
-              <span>{list.text}</span>
-              <button type="button" onClick={delEvent(list.id)}>
-                삭제
-              </button>
-            </li>
-          ))}
-        </ul>
-      </ListBox>
+      {ListContent && ListContent.length >= 1 && (
+        <ListBox>
+          <ul>
+            {ListContent.map(list => (
+              <li key={list.id}>
+                <Text
+                  done={list.done.toString()}
+                  onClick={doneEvent(list.id, list.done)}
+                >
+                  {list.text}
+                </Text>
+                <button type="button" onClick={delEvent(list.id)}>
+                  삭제
+                </button>
+              </li>
+            ))}
+          </ul>
+        </ListBox>
+      )}
     </>
   );
 };
