@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LOGOUT_REQUEST } from '../../modules/auths';
+import { ALERT_SUCCESS, ALERT_FAILURE } from '../../modules/alerts';
 import Button from '../Common/Button';
 
 const BtnContainer = styled.div`
@@ -22,6 +23,17 @@ const BtnBox = ({ location: { pathname } }) => {
       type: LOGOUT_REQUEST,
     });
   };
+
+  const onClick = () => {
+    dispatch({
+      type: ALERT_SUCCESS,
+    });
+    setTimeout(() => {
+      dispatch({
+        type: ALERT_FAILURE,
+      });
+    }, 3000);
+  };
   return (
     <>
       <BtnContainer>
@@ -29,7 +41,7 @@ const BtnBox = ({ location: { pathname } }) => {
           로그아웃
         </Button>
         {pathname === '/' ? (
-          <Button to="/" color="#6c63ff">
+          <Button to="/" color="#6c63ff" onClick={onClick}>
             포스트 작성
           </Button>
         ) : (

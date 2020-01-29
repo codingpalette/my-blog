@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SIGNUP_REQUEST, LOGIN_REQUEST } from '../../modules/auths';
+import { ALERT_SUCCESS, ALERT_FAILURE } from '../../modules/alerts';
 import Button from '../Common/Button';
+import AlertBox from '../Common/AlertBox';
 
 const FormContainer = styled.div`
   max-width: 360px;
@@ -39,7 +41,9 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
   const [idvalue, setIdvalue] = useState('');
   const [passvalue, setPassvalue] = useState('');
   const [passvalue2, setPassvalue2] = useState('');
-  const { isSignup } = useSelector(state => state.auths);
+  const [alertvalue, setAlertvalue] = useState('');
+  const { isSignup, isAuthError } = useSelector(state => state.auths);
+  const { isError } = useSelector(state => state.alerts);
   const dispatch = useDispatch();
 
   const idChange = e => {
@@ -78,6 +82,24 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
       history.push('/login'); // 로그인 화면으로 이동
     }
   }, [isSignup, history]);
+
+  // 로그인 실패 처리
+  useEffect(() => {
+    if (isAuthError !== '') {
+      dispatch({
+        type: ALERT_SUCCESS,
+      });
+      if (isAuthError === 'The email address is badly formatted.') {
+        setAlertvalue('이메일 주소가 올바르지 않습니다.');
+      }
+      setTimeout(() => {
+        dispatch({
+          type: ALERT_FAILURE,
+        });
+        setAlertvalue('');
+      }, 3000);
+    }
+  }, [isAuthError, dispatch]);
 
   return (
     <>
@@ -136,6 +158,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
             구글로그인
           </Button> */}
         </form>
+        <AlertBox>{alertvalue}</AlertBox>
       </FormContainer>
     </>
   );

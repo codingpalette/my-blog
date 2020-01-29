@@ -3,6 +3,7 @@ const initialState = {
   isSignup: false,
   isLogin: false,
   isUser: '',
+  isAuthError: '',
 };
 
 // 액션 type
@@ -50,6 +51,7 @@ function auths(state = initialState, action) {
     case LOGIN_FAILURE:
       return {
         ...state,
+        isAuthError: action.error.message,
       };
     // 로그아웃
     case LOGOUT_REQUEST:

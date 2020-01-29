@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Aside from '../Components/Common/Aside';
 import BtnBox from '../Components/Home/BtnBox';
+import AlertBox from '../Components/Common/AlertBox';
 
 const Section = styled.div`
   margin-top: 15px;
@@ -30,9 +31,9 @@ const MainLayout = ({ children }) => {
     <>
       <Section className="max_box">
         {isUser !== '' && <BtnBox />}
-
         <Content>{children}</Content>
         <Aside />
+        <AlertBox>비밀번호가 다릅니다.</AlertBox>
       </Section>
     </>
   );
