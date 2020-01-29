@@ -23,6 +23,7 @@ const Input = styled.input`
   box-sizing: border-box;
   outline: none;
   margin-bottom: 10px;
+  border-radius: 0;
   &:focus {
     outline: 1px solid #6c63ff;
   }
@@ -69,7 +70,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
           },
         });
   };
-  const googleLogin = e => {};
+  // const googleLogin = e => {};
 
   // 회원가입 성공 / 실패 처리
   useEffect(() => {
@@ -125,7 +126,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
               회원가입
             </Button>
           )}
-          <Button
+          {/* <Button
             type="button"
             fullWidth
             secondary
@@ -133,7 +134,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
             onClick={googleLogin}
           >
             구글로그인
-          </Button>
+          </Button> */}
         </form>
       </FormContainer>
     </>
