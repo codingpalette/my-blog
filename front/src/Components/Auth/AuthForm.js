@@ -13,16 +13,22 @@ const FormContainer = styled.div`
 `;
 
 const Input = styled.input`
-  display: block;
-  border: 1px solid #555;
-  outline: none;
-  padding: 5px;
-  box-sizing: border-box;
+  border: none;
+  background-color: #edf2f7;
   width: 100%;
+  display: block;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  outline: none;
   margin-bottom: 10px;
+  &:focus {
+    outline: 1px solid #6c63ff;
+  }
+  &::placeholder {
+    color: #4a5568;
+  }
   @media (prefers-color-scheme: dark) {
-    border: 1px solid #fff;
-    background-color: #1f2023;
+    background-color: #333;
   }
 `;
 
@@ -41,11 +47,11 @@ const AuthForm = ({ location: { pathname } }) => {
           )}
           <div style={{ textAlign: 'right' }}>
             {pathname === '/login' ? (
-              <Button ghost to={'/signup'}>
+              <Button ghost="true" to={'/signup'}>
                 회원가입
               </Button>
             ) : (
-              <Button ghost to={'/login'}>
+              <Button ghost="true" to={'/login'}>
                 로그인
               </Button>
             )}
