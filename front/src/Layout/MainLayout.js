@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Aside from '../Components/Common/Aside';
 import BtnBox from '../Components/Home/BtnBox';
 
@@ -24,10 +25,12 @@ const Content = styled.div`
 `;
 
 const MainLayout = ({ children }) => {
+  const { isUser } = useSelector(state => state.auths);
   return (
     <>
       <Section className="max_box">
-        <BtnBox />
+        {isUser !== '' && <BtnBox />}
+
         <Content>{children}</Content>
         <Aside />
       </Section>

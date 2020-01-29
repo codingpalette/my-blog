@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from 'react';
-// import AuthLayout from '../../Layout/AuthLayout';
 const AuthLayout = lazy(() => import('../../Layout/AuthLayout'));
 
 const LoginPresenter = () => {
