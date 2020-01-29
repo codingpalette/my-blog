@@ -41,9 +41,13 @@ const AuthForm = ({ location: { pathname } }) => {
           )}
           <div style={{ textAlign: 'right' }}>
             {pathname === '/login' ? (
-              <Button to={'/signup'}>회원가입</Button>
+              <Button ghost to={'/signup'}>
+                회원가입
+              </Button>
             ) : (
-              <Button to={'/login'}>로그인</Button>
+              <Button ghost to={'/login'}>
+                로그인
+              </Button>
             )}
           </div>
           {pathname === '/login' ? (

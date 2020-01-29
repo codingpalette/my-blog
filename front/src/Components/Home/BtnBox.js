@@ -23,6 +23,10 @@ const BtnBox = ({ location: { pathname } }) => {
             포스트 수정
           </Button>
         )}
+        <Button>포스트 수정</Button>
+        <Button secondary>포스트 수정</Button>
+        <Button ghost>포스트 수정</Button>
+        <Button disabled>포스트 수정</Button>
       </BtnContainer>
     </>
   );
