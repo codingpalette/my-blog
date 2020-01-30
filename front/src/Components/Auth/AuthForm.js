@@ -46,7 +46,6 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
   const [passvalue, setPassvalue] = useState('');
   const [passvalue2, setPassvalue2] = useState('');
   const [alertvalue, setAlertvalue] = useState('');
-  const [counter, setCounter] = useState(1);
   const { isSignup, isAuthError } = useSelector(state => state.auths);
   const dispatch = useDispatch();
 
@@ -62,26 +61,28 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    if (passvalue !== passvalue2) {
-      setAlertvalue('비밀번호가 서로 다릅니다.');
-      return;
+
+    if (pathname === '/login') {
+      dispatch({
+        type: LOGIN_REQUEST,
+        data: {
+          idvalue,
+          passvalue,
+        },
+      });
+    } else {
+      if (passvalue !== passvalue2) {
+        setAlertvalue('비밀번호가 서로 다릅니다.');
+        return;
+      }
+      dispatch({
+        type: SIGNUP_REQUEST,
+        data: {
+          idvalue,
+          passvalue,
+        },
+      });
     }
-    pathname === '/login'
-      ? dispatch({
-          type: LOGIN_REQUEST,
-          data: {
-            idvalue,
-            passvalue,
-          },
-        })
-      : dispatch({
-          type: SIGNUP_REQUEST,
-          data: {
-            idvalue,
-            passvalue,
-          },
-        });
-    setCounter(counter + 1);
   };
   // const googleLogin = e => {};
 
