@@ -2,7 +2,11 @@ import React, { useState, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SIGNUP_REQUEST, LOGIN_REQUEST } from '../../modules/auths';
+import {
+  SIGNUP_REQUEST,
+  LOGIN_REQUEST,
+  RESET_SUCCESS,
+} from '../../modules/auths';
 import { ALERT_SUCCESS, ALERT_FAILURE } from '../../modules/alerts';
 import Button from '../Common/Button';
 import AlertBox from '../Common/AlertBox';
@@ -42,8 +46,8 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
   const [passvalue, setPassvalue] = useState('');
   const [passvalue2, setPassvalue2] = useState('');
   const [alertvalue, setAlertvalue] = useState('');
+  const [counter, setCounter] = useState(1);
   const { isSignup, isAuthError } = useSelector(state => state.auths);
-  const { isError } = useSelector(state => state.alerts);
   const dispatch = useDispatch();
 
   const idChange = e => {
@@ -58,6 +62,10 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
+    if (passvalue !== passvalue2) {
+      setAlertvalue('비밀번호가 서로 다릅니다.');
+      return;
+    }
     pathname === '/login'
       ? dispatch({
           type: LOGIN_REQUEST,
@@ -73,31 +81,48 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
             passvalue,
           },
         });
+    setCounter(counter + 1);
   };
   // const googleLogin = e => {};
 
-  // 회원가입 성공 / 실패 처리
+  // 처음 리엣
+  useEffect(() => {
+    dispatch({
+      type: RESET_SUCCESS,
+    });
+  }, [dispatch]);
+
+  // 회원가입 성공
   useEffect(() => {
     if (isSignup) {
       history.push('/login'); // 로그인 화면으로 이동
     }
   }, [isSignup, history]);
 
-  // 로그인 실패 처리
+  // 실패 처리
   useEffect(() => {
+    dispatch({
+      type: ALERT_FAILURE,
+    });
     if (isAuthError !== '') {
       dispatch({
         type: ALERT_SUCCESS,
       });
-      if (isAuthError === 'The email address is badly formatted.') {
+      if (isAuthError === 'auth/invalid-email') {
         setAlertvalue('이메일 주소가 올바르지 않습니다.');
       }
-      setTimeout(() => {
-        dispatch({
-          type: ALERT_FAILURE,
-        });
-        setAlertvalue('');
-      }, 3000);
+      if (isAuthError === 'auth/wrong-password') {
+        setAlertvalue('비밀번호를 올바르게 입력해주세요.');
+      }
+      if (isAuthError === 'auth/weak-password') {
+        setAlertvalue('비밀번호를 6자리 이상 입력해주세요.');
+      }
+      if (isAuthError === 'auth/email-already-in-use') {
+        setAlertvalue('이미 가입되어 있는 이메일 입니다.');
+      }
+      if (isAuthError === 'auth/user-not-found') {
+        setAlertvalue('등록되지 않은 이메일 입니다.');
+      }
     }
   }, [isAuthError, dispatch]);
 

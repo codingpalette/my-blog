@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 
 const up = keyframes`
   0%{
-    transform:translateY(50%);
+    transform:translate(-50% , 50%);
     opacity: 0;
   }
   100%{
-    transform:translateY(0);
+    transform:translate(-50% , 0);
     opacity: 1;
   }
 `;
@@ -26,6 +26,7 @@ const Alert = styled.div`
   color: #f50057;
   padding: 6px 16px;
   font-size: 13px;
+  transform: translateX(-50%);
   transition: opacity 0.3s;
   animation: ${up} 0.5s;
 `;

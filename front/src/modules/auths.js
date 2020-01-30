@@ -21,6 +21,8 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const STATE_USER_SUCCESS = 'STATE_USER_SUCCESS';
 
+export const RESET_SUCCESS = 'RESET_SUCCESS';
+
 function auths(state = initialState, action) {
   switch (action.type) {
     // 회원가입
@@ -36,6 +38,7 @@ function auths(state = initialState, action) {
     case SIGNUP_FAILURE:
       return {
         ...state,
+        isAuthError: action.error.code,
       };
     // 로그인
     case LOGIN_REQUEST:
@@ -51,7 +54,7 @@ function auths(state = initialState, action) {
     case LOGIN_FAILURE:
       return {
         ...state,
-        isAuthError: action.error.message,
+        isAuthError: action.error.code,
       };
     // 로그아웃
     case LOGOUT_REQUEST:
@@ -73,6 +76,11 @@ function auths(state = initialState, action) {
       return {
         ...state,
         isUser: user,
+      };
+    case RESET_SUCCESS:
+      return {
+        ...state,
+        isAuthError: '',
       };
     default:
       return state;
