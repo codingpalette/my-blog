@@ -19,7 +19,7 @@ const PostBtnBox = () => {
         <Button to="/" ghost="true">
           취소
         </Button>
-        <Button>포스트 작성</Button>
+        <Button type="submit">포스트 작성</Button>
       </BtnBox>
     </>
   );

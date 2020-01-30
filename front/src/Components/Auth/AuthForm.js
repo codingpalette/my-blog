@@ -21,23 +21,8 @@ const FormContainer = styled.div`
 `;
 
 const Input = styled.input`
-  border: none;
-  background-color: #edf2f7;
-  width: 100%;
-  display: block;
-  padding: 8px 16px;
-  box-sizing: border-box;
-  outline: none;
-  margin-bottom: 10px;
-  border-radius: 0;
   &:focus {
     outline: 1px solid #6c63ff;
-  }
-  &::placeholder {
-    color: #4a5568;
-  }
-  @media (prefers-color-scheme: dark) {
-    background-color: #333;
   }
 `;
 

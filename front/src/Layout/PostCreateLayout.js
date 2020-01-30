@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import EditorBox from '../Components/Post/EditorBox';
-import PostBtnBox from '../Components/Post/PostBtnBox';
+import EditorForm from '../Components/Post/EditorForm';
 
 const Section = styled.div`
   margin-top: 15px;
@@ -13,8 +12,7 @@ const PostCreateLayout = () => {
   return (
     <>
       <Section className="max_box">
-        <EditorBox />
-        <PostBtnBox />
+        <EditorForm />
       </Section>
     </>
   );

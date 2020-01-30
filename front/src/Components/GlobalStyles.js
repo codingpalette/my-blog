@@ -33,6 +33,24 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  input,select{
+    border: none;
+    background-color: #edf2f7;
+    width: 100%;
+    display: block;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    outline: none;
+    margin-bottom: 15px;
+    border-radius: 0;
+    &::placeholder {
+      color: #4a5568;
+    }
+    @media (prefers-color-scheme: dark) {
+      background-color: #333;
+    }
+  }
+
 
 `;
 
