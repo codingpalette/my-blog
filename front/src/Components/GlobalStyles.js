@@ -28,7 +28,11 @@ const GlobalStyles = createGlobalStyle`
       background: #000;
     }
     body *{color:#ddd;}
+    .tui-editor-contents *{
+      color:#DDD !important;
+    }
   }
+
 
 `;
 

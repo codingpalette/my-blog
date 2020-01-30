@@ -48,7 +48,7 @@ const HeaderNav = styled.nav`
     background-color: #6c63ff;
     max-height: 0;
     &.active {
-      max-height: 100px;
+      max-height: 120px;
     }
     ul li {
       width: 100%;
