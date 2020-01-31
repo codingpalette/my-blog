@@ -58,5 +58,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/my-blog-7d61e/us-central1"
+  "proxy": "http://localhost:5000/my-blog-7d61e/us-central1/"
 }
