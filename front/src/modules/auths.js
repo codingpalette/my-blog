@@ -23,6 +23,10 @@ export const STATE_USER_SUCCESS = 'STATE_USER_SUCCESS';
 
 export const RESET_SUCCESS = 'RESET_SUCCESS';
 
+export const GOOGLE_LOGIN_REQUEST = 'GOOGLE_LOGIN_REQUEST';
+export const GOOGLE_LOGIN_SUCCESS = 'GOOGLE_LOGIN_SUCCESS';
+export const GOOGLE_LOGIN_FAILURE = 'GOOGLE_LOGIN_FAILURE';
+
 function auths(state = initialState, action) {
   switch (action.type) {
     // 회원가입
@@ -81,6 +85,19 @@ function auths(state = initialState, action) {
       return {
         ...state,
         isAuthError: '',
+      };
+    case GOOGLE_LOGIN_REQUEST:
+      return {
+        ...state,
+      };
+    case GOOGLE_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLogin: true,
+      };
+    case GOOGLE_LOGIN_FAILURE:
+      return {
+        ...state,
       };
     default:
       return state;

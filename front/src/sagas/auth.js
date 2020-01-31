@@ -9,6 +9,9 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  GOOGLE_LOGIN_SUCCESS,
+  GOOGLE_LOGIN_FAILURE,
+  GOOGLE_LOGIN_REQUEST,
 } from '../modules/auths';
 import * as firebase from 'firebase/app';
 
@@ -85,10 +88,34 @@ function* watchAuthLogout() {
   yield takeLatest(LOGOUT_REQUEST, logout);
 }
 
+function googleloginAPI() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  return firebase.auth().signInWithPopup(provider);
+}
+
+function* googlelogin() {
+  try {
+    yield call(googleloginAPI);
+    yield put({
+      type: GOOGLE_LOGIN_SUCCESS,
+    });
+  } catch (e) {
+    yield put({
+      type: GOOGLE_LOGIN_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* watchAuthGoogleLogin() {
+  yield takeLatest(GOOGLE_LOGIN_REQUEST, googlelogin);
+}
+
 export default function* authSaga() {
   yield all([
     fork(watchAuthLoing),
     fork(watchAuthSignup),
     fork(watchAuthLogout),
+    fork(watchAuthGoogleLogin),
   ]);
 }

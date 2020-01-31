@@ -6,6 +6,7 @@ import {
   SIGNUP_REQUEST,
   LOGIN_REQUEST,
   RESET_SUCCESS,
+  GOOGLE_LOGIN_REQUEST,
 } from '../../modules/auths';
 import { ALERT_SUCCESS, ALERT_FAILURE } from '../../modules/alerts';
 import Button from '../Common/Button';
@@ -69,7 +70,11 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
       });
     }
   };
-  // const googleLogin = e => {};
+  const googleLogin = e => {
+    dispatch({
+      type: GOOGLE_LOGIN_REQUEST,
+    });
+  };
 
   // 처음 리엣
   useEffect(() => {
@@ -159,7 +164,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
               회원가입
             </Button>
           )}
-          {/* <Button
+          <Button
             type="button"
             fullWidth
             secondary
@@ -167,7 +172,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
             onClick={googleLogin}
           >
             구글로그인
-          </Button> */}
+          </Button>
         </form>
         <AlertBox>{alertvalue}</AlertBox>
       </FormContainer>

@@ -12,6 +12,7 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
+      // console.log(user);
       dispatch({
         type: STATE_USER_SUCCESS,
         data: user,
