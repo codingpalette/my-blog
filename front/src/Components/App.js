@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import GlobalStyles from './GlobalStyles';
 import Router from './Router';
 
@@ -10,16 +10,32 @@ function App() {
   const [render, setRender] = useState(false);
   const dispatch = useDispatch();
 
+  const userState = useCallback(
+    async user => {
+      try {
+        const token = await user.getIdToken();
+        const { claims } = await user.getIdTokenResult();
+        // console.log(claims);
+        dispatch({
+          type: STATE_USER_SUCCESS,
+          data: { user, token, claims },
+        });
+      } catch (e) {
+        // console.log(e);
+      } finally {
+        setRender(true);
+      }
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       // console.log(user);
-      dispatch({
-        type: STATE_USER_SUCCESS,
-        data: user,
-      });
-      setRender(true);
+
+      userState(user);
     });
-  }, [dispatch]);
+  }, [userState]);
 
   return (
     <>

@@ -4,6 +4,8 @@ const initialState = {
   isLogin: false,
   isUser: '',
   isAuthError: '',
+  Token: '',
+  claims: null,
 };
 
 // 액션 type
@@ -76,11 +78,16 @@ function auths(state = initialState, action) {
         ...state,
       };
     case STATE_USER_SUCCESS:
-      const user = action.data !== null ? action.data.email : '';
+      const user = action.data.user !== null ? action.data.user.email : '';
+      const token = action.data.user !== null ? action.data.token : '';
+      const claims = action.data.user !== null ? action.data.claims : '';
       return {
         ...state,
         isUser: user,
+        Token: token,
+        claims: claims,
       };
+
     case RESET_SUCCESS:
       return {
         ...state,

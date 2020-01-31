@@ -25,6 +25,7 @@ function* signup(action) {
   try {
     // console.log(action);
     yield call(signupAPI, action.data);
+    firebase.auth().currentUser.getIdToken(true);
     yield put({
       type: SIGNUP_SUCCESS,
     });
@@ -96,6 +97,7 @@ function googleloginAPI() {
 function* googlelogin() {
   try {
     yield call(googleloginAPI);
+    firebase.auth().currentUser.getIdToken(true);
     yield put({
       type: GOOGLE_LOGIN_SUCCESS,
     });
