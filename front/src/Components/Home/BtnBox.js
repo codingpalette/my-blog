@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LOGOUT_REQUEST } from '../../modules/auths';
 import Button from '../Common/Button';
+import axios from 'axios';
 
 const BtnContainer = styled.div`
   width: 100%;
@@ -22,6 +23,15 @@ const BtnBox = ({ location: { pathname } }) => {
       type: LOGOUT_REQUEST,
     });
   };
+  const apiEvent = async () => {
+    try {
+      const res = await axios.post('/test/');
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    } finally {
+    }
+  };
 
   return (
     <>
@@ -38,6 +48,7 @@ const BtnBox = ({ location: { pathname } }) => {
             포스트 수정
           </Button>
         )}
+        <Button onClick={apiEvent}>API 테스트</Button>
       </BtnContainer>
     </>
   );
