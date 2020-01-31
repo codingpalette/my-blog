@@ -1,7 +1,20 @@
 const app = require('express')();
 
-app.post('/', (req, res) => {
-  res.send('post ok');
+// app.use((req, res, next) => {
+//   console.log(JSON.stringify(req.headers));
+//   next();
+// });
+
+app.use(require('../middlewares/Token'));
+
+app.post('/', async (req, res, next) => {
+  try {
+    // throw Error('abc');
+    await res.send('post ok');
+  } catch (e) {
+    console.error(e);
+    await next(e);
+  }
 });
 
 app.get('/', (req, res) => {

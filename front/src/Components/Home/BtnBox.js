@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { LOGOUT_REQUEST } from '../../modules/auths';
 import Button from '../Common/Button';
-import axios from 'axios';
+import { testApi } from '../../api';
 
 const BtnContainer = styled.div`
   width: 100%;
@@ -25,8 +25,10 @@ const BtnBox = ({ location: { pathname } }) => {
   };
   const apiEvent = async () => {
     try {
-      const res = await axios.post('/test/');
-      console.log(res);
+      // const res = await testApi.testGet();
+      const { data } = await testApi.testGet();
+      // console.log(res);
+      console.log(data);
     } catch (e) {
       console.log(e);
     } finally {
