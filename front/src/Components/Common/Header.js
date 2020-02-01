@@ -1,128 +1,128 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const HeaderBox = styled.header`
   width: 100%;
-  height: 50px;
+  height: 60px;
   position: sticky;
   left: 0;
-  top: 0;
+  top: 15px;
   z-index: 1000;
-  background-color: #6c63ff;
+  box-sizing: border-box;
+
+  /* background-color: #6c63ff;
   @media (prefers-color-scheme: dark) {
     background-color: #1f2023;
-  }
+  } */
 `;
 
 const HeaderContent = styled.div`
   display: flex;
   align-items: center;
+  background-color: #ebf5fc;
+  padding: 0 10px;
+  border-radius: 30px;
+  box-shadow: -6px -6px 20px rgba(255, 255, 255, 1),
+    6px 6px 20px rgba(0, 0, 0, 0.1);
   height: 100%;
   h1 {
+    margin-left: 20px;
     margin-right: 10px;
   }
 `;
 
 const HeaderNav = styled.nav`
-  transition: 0.3s;
-  overflow-y: hidden;
+  height: 100%;
+  overflow-x: auto;
+  border-radius: 30px;
+  display: flex;
   ul {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   ul li a {
-    color: #fff;
-    padding: 0 10px;
-    transition: color 0.2s;
+    display: block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 40px;
+    color: #6c63ff;
+    box-shadow: -4px -4px 15px rgba(255, 255, 255, 1),
+      4px 4px 15px rgba(0, 0, 0, 0.1);
   }
   ul li a:hover {
-    color: rgba(255, 255, 255, 0.75);
-  }
-  @media screen and (max-width: 768px) {
-    position: absolute;
-    left: 0%;
-    top: 50px;
-    width: 100%;
-    background-color: #6c63ff;
-    max-height: 0;
-    &.active {
-      max-height: 120px;
-    }
-    ul li {
-      width: 100%;
-    }
-    ul li a {
-      display: block;
-      padding: 10px;
-    }
-  }
-  @media screen and (max-width: 768px) and (prefers-color-scheme: dark) {
-    background-color: #1f2023;
+    box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.5),
+      inset 4px 4px 10px rgba(0, 0, 0, 0.1);
   }
 `;
 
-const HeaderNavBtn = styled.button`
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 27px;
-  height: 20px;
-  display: none;
-  span {
-    position: absolute;
-    left: 50%;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-    transition: 0.3s;
-  }
-  .line1 {
-    top: 0;
-    transform: translate(-50%);
-  }
-  .line2 {
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .line3 {
-    top: 100%;
-    transform: translate(-50%, -100%);
-  }
-  &.active {
-    .line1 {
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-    .line2 {
-      opacity: 0;
-    }
-    .line3 {
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-  }
-  @media screen and (max-width: 768px) {
-    display: block;
-  }
-`;
+// const HeaderNavBtn = styled.button`
+//   position: absolute;
+//   right: 40px;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   width: 45px;
+//   height: 45px;
+//   display: none;
+//   box-shadow: -2px -2px 6px rgba(255, 255, 255, 1),
+//     2px 2px 6px rgba(0, 0, 0, 0.1);
+//   border-radius: 50%;
+//   span {
+//     position: absolute;
+//     left: 50%;
+//     width: 60%;
+//     height: 2px;
+//     background-color: #6c63ff;
+//     transition: 0.3s;
+//   }
+//   .line1 {
+//     top: 30%;
+//     transform: translate(-50%);
+//   }
+//   .line2 {
+//     top: 50%;
+//     transform: translate(-50%, -50%);
+//   }
+//   .line3 {
+//     top: 70%;
+//     transform: translate(-50%, -100%);
+//   }
+//   &.active {
+//     box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 1),
+//       inset 2px 2px 6px rgba(0, 0, 0, 0.1);
+//     .line1 {
+//       top: 50%;
+//       transform: translate(-50%, -50%) rotate(45deg);
+//     }
+//     .line2 {
+//       opacity: 0;
+//     }
+//     .line3 {
+//       top: 50%;
+//       transform: translate(-50%, -50%) rotate(-45deg);
+//     }
+//   }
+//   @media screen and (max-width: 768px) {
+//     display: block;
+//   }
+// `;
 
 const Header = () => {
-  const [active, setActive] = useState('');
+  // const [active, setActive] = useState('');
 
-  const NavBtnClick = () => {
-    setActive(active === '' ? 'active' : '');
-  };
+  // const NavBtnClick = () => {
+  //   setActive(active === '' ? 'active' : '');
+  // };
   return (
     <>
-      <HeaderBox>
-        <HeaderContent className="max_box">
+      <HeaderBox className="max_box">
+        <HeaderContent>
           <h1>
             <Link to="/">로고</Link>
           </h1>
-          <HeaderNav className={active}>
+          <HeaderNav>
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -135,11 +135,11 @@ const Header = () => {
               </li>
             </ul>
           </HeaderNav>
-          <HeaderNavBtn className={active} onClick={NavBtnClick}>
+          {/* <HeaderNavBtn className={active} onClick={NavBtnClick}>
             <span className="line1"></span>
             <span className="line2"></span>
             <span className="line3"></span>
-          </HeaderNavBtn>
+          </HeaderNavBtn> */}
         </HeaderContent>
       </HeaderBox>
     </>
