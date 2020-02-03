@@ -4,7 +4,7 @@ const GlobalStyles = createGlobalStyle`
   ${reset};
   @font-face { font-family: 'RIDIBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
   html{font-size:16px;}
-  body{background-color: #ebf5fc;}
+  body{background-color: #efeeee;}
   body *{font-family:RIDIBatang; color:#555;}
   a{text-decoration:none;}
   button{background:none; border:none; outline:none; cursor:pointer; padding:0;}
@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
 
   @media (prefers-color-scheme: dark) {
     body {
-      background-color: #131419;
+      background-color: #262a3c;
     }
     body *{color:#ddd;}
     .tui-editor-contents *{
