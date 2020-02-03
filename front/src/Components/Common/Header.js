@@ -27,7 +27,7 @@ const HeaderContent = styled.div`
   height: 100%;
   @media (prefers-color-scheme: dark) {
     background-color: #262a3c;
-    box-shadow: 6px 6px 12px #202433, -6px -6px 12px #2c3045;
+    box-shadow: 4px 4px 7px #171924, -2px -2px 5px #353b54;
   }
   h1 {
     margin-left: 20px;
@@ -55,13 +55,13 @@ const HeaderNav = styled.nav`
     color: #6c63ff;
     box-shadow: 3px 3px 6px #cbcaca, -3px -3px 6px #ffffff;
     @media (prefers-color-scheme: dark) {
-      box-shadow: 3px 3px 6px #202433, -3px -3px 6px #2c3045;
+      box-shadow: 4px 4px 7px #171924, -2px -2px 5px #353b54;
     }
   }
   ul li a:hover {
     box-shadow: inset 3px 3px 6px #cbcaca, inset -3px -3px 6px #ffffff;
     @media (prefers-color-scheme: dark) {
-      box-shadow: inset 3px 3px 6px #202433, inset -3px -3px 6px #2c3045;
+      box-shadow: inset 4px 4px 7px #171924, inset -2px -2px 5px #353b54;
     }
   }
 `;

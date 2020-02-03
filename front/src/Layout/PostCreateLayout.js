@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import EditorForm from '../Components/Post/EditorForm';
 
 const Section = styled.div`
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   box-sizing: border-box;
 `;
 

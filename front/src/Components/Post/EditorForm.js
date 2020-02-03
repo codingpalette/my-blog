@@ -13,10 +13,12 @@ import PostBtnBox from './PostBtnBox';
 
 const InputTitle = styled.input`
   font-size: 18px;
+  margin-bottom: 15px;
 `;
 
 const Select = styled.select`
   font-size: 18px;
+  margin-bottom: 15px;
 `;
 
 const EditorBox = memo(() => {

@@ -22,9 +22,7 @@ const FormContainer = styled.div`
 `;
 
 const Input = styled.input`
-  &:focus {
-    outline: 1px solid #6c63ff;
-  }
+  margin-bottom: 15px;
 `;
 
 const AuthForm = memo(({ location: { pathname }, history }) => {
@@ -146,29 +144,28 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
           )}
           <div style={{ textAlign: 'right' }}>
             {pathname === '/login' ? (
-              <Button ghost="true" to={'/signup'}>
+              <Button to={'/signup'} style={{ fontSize: '12px' }}>
                 회원가입
               </Button>
             ) : (
-              <Button ghost="true" to={'/login'}>
+              <Button to={'/login'} style={{ fontSize: '12px' }}>
                 로그인
               </Button>
             )}
           </div>
           {pathname === '/login' ? (
-            <Button fullWidth style={{ marginTop: '10px' }}>
+            <Button fullWidth style={{ marginTop: '15px' }}>
               로그인
             </Button>
           ) : (
-            <Button fullWidth style={{ marginTop: '10px' }}>
+            <Button fullWidth style={{ marginTop: '15px' }}>
               회원가입
             </Button>
           )}
           <Button
             type="button"
             fullWidth
-            secondary
-            style={{ marginTop: '10px' }}
+            style={{ marginTop: '15px' }}
             onClick={googleLogin}
           >
             구글로그인
