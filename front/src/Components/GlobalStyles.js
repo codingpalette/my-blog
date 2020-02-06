@@ -34,13 +34,16 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  select { appearance:none }
+
+
   input,select{
     display:block;
     width:100%;
     height:40px;
     background-color: #efeeee;
     box-shadow: inset 4px 4px 8px #cbcaca, 
-    inset -4px -4px 8px #ffffff;
+    inset -4px -4px 8px #ffffff !important;
     outline:none;
     border:none;
     border-radius:40px;
@@ -48,12 +51,11 @@ const GlobalStyles = createGlobalStyle`
     padding:5px 15px;
     @media (prefers-color-scheme: dark) {
       background-color: #262a3c;
-      box-shadow: inset 4px 4px 7px #171924, inset -2px -2px 5px #353b54;
+      box-shadow: inset 4px 4px 7px #171924, inset -2px -2px 5px #353b54 !important;
     }
    
   }
 
-  select {-webkit-appearance:none;  -moz-appearance:none;  appearance:none }
 
 
 

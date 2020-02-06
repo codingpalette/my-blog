@@ -15,7 +15,7 @@ function App() {
       try {
         const token = await user.getIdToken();
         const { claims } = await user.getIdTokenResult();
-        console.log(claims);
+        // console.log(claims);
         dispatch({
           type: STATE_USER_SUCCESS,
           data: { user, token, claims },

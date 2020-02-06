@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { POST_ADD_REQUEST } from '../../modules/posts';
 
 import 'codemirror/lib/codemirror.css';
@@ -8,7 +8,7 @@ import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
 import 'highlight.js/styles/github.css';
 import Editor from 'tui-editor';
-import Viewer from 'tui-editor/dist/tui-editor-Viewer';
+// import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 import PostBtnBox from './PostBtnBox';
 
 const InputTitle = styled.input`
@@ -34,7 +34,7 @@ const EditorBox = memo(() => {
   };
 
   const EditorElement = useRef(null);
-  const ViewerElement = useRef(null);
+  // const ViewerElement = useRef(null);
 
   const dispatch = useDispatch();
 
