@@ -4,6 +4,8 @@ const app = require('express')();
 //   console.log(JSON.stringify(req.headers));
 //   next();
 // });
+const cors = require('cors');
+app.use(cors());
 
 app.use(require('../middlewares/Token'));
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const firebaseAPI = axios.create({
-  baseURL: '',
+  baseURL: 'https://us-central1-my-blog-7d61e.cloudfunctions.net/',
   timeout: 5000,
   headers: { 'X-Custom-Header': 'foobar' },
 });
