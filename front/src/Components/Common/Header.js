@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const HeaderBox = styled.header`
   width: 100%;
-  height: 60px;
+  height: 50px;
   position: sticky;
   left: 0;
   top: 15px;
@@ -22,7 +22,7 @@ const HeaderContent = styled.div`
   align-items: center;
   background-color: #efeeee;
   padding: 0 10px;
-  border-radius: 30px;
+  border-radius: 25px;
   box-shadow: 6px 6px 12px #cbcaca, -6px -6px 12px #ffffff;
   height: 100%;
   @media (prefers-color-scheme: dark) {
@@ -49,20 +49,12 @@ const HeaderNav = styled.nav`
   }
   ul li a {
     display: block;
-    padding: 10px 20px;
+    padding: 5px 10px;
     margin: 0 5px;
-    border-radius: 40px;
-    color: #6c63ff;
-    box-shadow: 3px 3px 6px #cbcaca, -3px -3px 6px #ffffff;
-    @media (prefers-color-scheme: dark) {
-      box-shadow: 4px 4px 7px #171924, -2px -2px 5px #353b54;
-    }
+    transition: color 0.2s;
   }
   ul li a:hover {
-    box-shadow: inset 3px 3px 6px #cbcaca, inset -3px -3px 6px #ffffff;
-    @media (prefers-color-scheme: dark) {
-      box-shadow: inset 4px 4px 7px #171924, inset -2px -2px 5px #353b54;
-    }
+    color: #6c63ff;
   }
 `;
 

@@ -13,12 +13,10 @@ import PostBtnBox from './PostBtnBox';
 
 const InputTitle = styled.input`
   font-size: 18px;
-  margin-bottom: 15px;
 `;
 
 const Select = styled.select`
   font-size: 18px;
-  margin-bottom: 15px;
 `;
 
 const EditorBox = memo(() => {
@@ -117,18 +115,22 @@ const EditorBox = memo(() => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <InputTitle
-          placeholder="제목을 입력해주세요"
-          value={title}
-          onChange={titleCange}
-        />
+        <div className="input_box">
+          <InputTitle
+            placeholder="제목을 입력해주세요"
+            value={title}
+            onChange={titleCange}
+          />
+        </div>
 
-        <Select value={select} onChange={selectChange}>
-          <option vlaue="HTML">HTML</option>
-          <option vlaue="CSS">CSS</option>
-          <option vlaue="JavaScript">JavaScript</option>
-          <option vlaue="React">React</option>
-        </Select>
+        <div className="input_box">
+          <Select value={select} onChange={selectChange}>
+            <option vlaue="HTML">HTML</option>
+            <option vlaue="CSS">CSS</option>
+            <option vlaue="JavaScript">JavaScript</option>
+            <option vlaue="React">React</option>
+          </Select>
+        </div>
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
