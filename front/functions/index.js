@@ -16,6 +16,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 
 exports.test = functions.https.onRequest(require('./test'));
+exports.admin = functions.https.onRequest(require('./admin'));
 
 exports.createUser = functions.auth.user().onCreate(async user => {
   const { uid, email, displayName, emailVerified, photoURL, disabled } = user;

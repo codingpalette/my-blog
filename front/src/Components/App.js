@@ -15,6 +15,7 @@ function App() {
       try {
         const token = await user.getIdToken();
         const { claims } = await user.getIdTokenResult();
+        localStorage.setItem('access_token', token);
         // console.log(claims);
         dispatch({
           type: STATE_USER_SUCCESS,
@@ -31,6 +32,7 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
+      localStorage.removeItem('access_token');
       // console.log(user);
 
       userState(user);

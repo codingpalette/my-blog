@@ -9,7 +9,7 @@ const firebaseAPI = axios.create({
 firebaseAPI.interceptors.request.use(
   function(config) {
     // Do something before request is sent
-    config.headers.authorization = Math.random();
+    config.headers.authorization = localStorage.getItem('access_token');
     return config;
   },
   function(error) {
@@ -20,4 +20,8 @@ firebaseAPI.interceptors.request.use(
 
 export const testApi = {
   testGet: () => firebaseAPI.get('test/'),
+};
+
+export const adminApi = {
+  users: () => firebaseAPI.get('/admin/users'),
 };

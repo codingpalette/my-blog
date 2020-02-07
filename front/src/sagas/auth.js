@@ -25,7 +25,7 @@ function* signup(action) {
   try {
     // console.log(action);
     yield call(signupAPI, action.data);
-    firebase.auth().currentUser.getIdToken(true);
+    firebase.auth().currentUser.getIdToken();
     yield put({
       type: SIGNUP_SUCCESS,
     });
@@ -91,13 +91,14 @@ function* watchAuthLogout() {
 
 function googleloginAPI() {
   const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().languageCode = 'ko';
   return firebase.auth().signInWithPopup(provider);
 }
 
 function* googlelogin() {
   try {
     yield call(googleloginAPI);
-    firebase.auth().currentUser.getIdToken(true);
+    firebase.auth().currentUser.getIdToken();
     yield put({
       type: GOOGLE_LOGIN_SUCCESS,
     });
