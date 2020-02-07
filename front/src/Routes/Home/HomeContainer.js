@@ -1,34 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HomePresenter from './HomePresenter';
 
-const listData = [
-  {
-    id: 1,
-    title: '제목라인1',
-    link: '/',
-    date: '2020-45-56',
-    text:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem',
-  },
-  {
-    id: 2,
-    title: '제목라인2',
-    link: '/',
-    date: '2020-45-56',
-    text:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem',
-  },
-  {
-    id: 3,
-    title: '제목라인3',
-    link: '/',
-    date: '2020-45-56',
-    text:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem',
-  },
-];
+import { useSelector, useDispatch } from 'react-redux';
+import { POST_LOAD_REQUEST } from '../../modules/posts';
+
+const listData = [];
 
 const HomeContainer = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: POST_LOAD_REQUEST,
+    });
+  }, [dispatch]);
+
   return (
     <>
       <HomePresenter listData={listData}></HomePresenter>

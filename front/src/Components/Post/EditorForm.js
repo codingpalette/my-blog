@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { POST_ADD_REQUEST } from '../../modules/posts';
@@ -19,7 +20,7 @@ const Select = styled.select`
   font-size: 18px;
 `;
 
-const EditorBox = memo(() => {
+const EditorBox = memo(({ history }) => {
   const [title, setTitle] = useState('');
   const [select, setSelect] = useState('HTML');
 
@@ -110,6 +111,7 @@ const EditorBox = memo(() => {
         reserseCreatedAt,
       },
     });
+    history.push('/');
   };
 
   return (
@@ -140,4 +142,4 @@ const EditorBox = memo(() => {
   );
 });
 
-export default EditorBox;
+export default withRouter(EditorBox);
