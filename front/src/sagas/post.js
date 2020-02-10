@@ -11,7 +11,7 @@ import * as firebase from 'firebase/app';
 
 function postaddtAPI(action) {
   // console.log(action);
-  const { title, category, name, description, tags, content } = action;
+  const { title, category, name, description, tags, date, content } = action;
   const id = category + '_' + name;
   const createdAt = new Date();
   const modifiedAt = new Date();
@@ -19,7 +19,7 @@ function postaddtAPI(action) {
     .firestore()
     .collection('docs')
     .doc(id)
-    .set({ title, description, tags, createdAt });
+    .set({ title, description, tags, createdAt, date });
   const cid = id + '/content/last';
   firebase
     .firestore()

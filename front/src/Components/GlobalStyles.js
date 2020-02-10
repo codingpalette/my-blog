@@ -49,6 +49,8 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .react-datepicker-wrapper{width:100%;}
+
 
 
 

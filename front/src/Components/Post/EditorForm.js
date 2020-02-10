@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { POST_ADD_REQUEST } from '../../modules/posts';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { registerLocale } from 'react-datepicker';
+import ko from 'date-fns/locale/ko';
+
 import 'codemirror/lib/codemirror.css';
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
@@ -11,6 +16,8 @@ import 'highlight.js/styles/github.css';
 import Editor from 'tui-editor';
 // import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 import PostBtnBox from './PostBtnBox';
+
+registerLocale('ko', ko);
 
 const InputTag = styled.input`
   font-size: 18px;
@@ -26,6 +33,7 @@ const EditorBox = memo(({ history }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [tags] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
 
   const titleChange = e => {
     setTitle(e.target.value);
@@ -105,6 +113,19 @@ const EditorBox = memo(({ history }) => {
       alert('내용을 입력해 주세요.');
       return;
     }
+    let dd = startDate.getDate();
+    let mm = startDate.getMonth() + 1; //January is 0!
+    const yyyy = startDate.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    const date = yyyy + '-' + mm + '-' + dd;
 
     // const preview = content.replace(/(<([^>]+)>)/gi, '').substring(0, 300);
 
@@ -115,6 +136,7 @@ const EditorBox = memo(({ history }) => {
         category,
         name,
         description,
+        date,
         tags,
         content,
       },
@@ -142,6 +164,13 @@ const EditorBox = memo(({ history }) => {
           placeholder="네임을 입력해주세요"
           value={name}
           onChange={nameChange}
+        />
+
+        <DatePicker
+          selected={startDate}
+          dateFormat="yyyy-MM-dd"
+          onChange={date => setStartDate(date)}
+          locale="ko"
         />
 
         <InputTag
