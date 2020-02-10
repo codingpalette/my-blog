@@ -22,10 +22,10 @@ const Select = styled.select`
 
 const EditorBox = memo(({ history }) => {
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('HTML');
+  const [category, setCategory] = useState('html');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [tags, setTags] = useState([]);
+  const [tags] = useState([]);
 
   const titleChange = e => {
     setTitle(e.target.value);
@@ -132,10 +132,10 @@ const EditorBox = memo(({ history }) => {
         />
 
         <Select value={category} onChange={categoryChange}>
-          <option vlaue="HTML">HTML</option>
-          <option vlaue="CSS">CSS</option>
-          <option vlaue="JavaScript">JavaScript</option>
-          <option vlaue="React">React</option>
+          <option vlaue="html">HTML</option>
+          <option vlaue="css">CSS</option>
+          <option vlaue="javascript">JavaScript</option>
+          <option vlaue="react">React</option>
         </Select>
 
         <InputTag

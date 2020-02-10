@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import Header from '../../Components/Common/Header';
 import { adminApi } from '../../api';
 

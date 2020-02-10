@@ -4,9 +4,8 @@ import HomePresenter from './HomePresenter';
 import { useSelector, useDispatch } from 'react-redux';
 import { POST_LOAD_REQUEST } from '../../modules/posts';
 
-const listData = [];
-
 const HomeContainer = () => {
+  const { Items } = useSelector(state => state.posts);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
@@ -16,7 +15,7 @@ const HomeContainer = () => {
 
   return (
     <>
-      <HomePresenter listData={listData}></HomePresenter>
+      <HomePresenter listData={Items}></HomePresenter>
     </>
   );
 };

@@ -1,9 +1,9 @@
 // 초기값 설정
 const initialState = {
-  Title: '',
-  Content: '',
   Items: [],
   TotalCount: null,
+  Title: '',
+  Content: '',
 };
 
 // 액션 type
@@ -34,9 +34,22 @@ function posts(state = initialState, action) {
         ...state,
       };
     case POST_LOAD_SUCCESS:
-      // console.log(action);
+      console.log(action);
+      const list = [];
+      action.data.forEach(v => {
+        const item = v.data();
+        console.log(v.id);
+        item.id = v.id;
+        item.category = v.id.split('_')[0];
+        item.name = v.id.split('_')[1];
+
+        list.push(item);
+      });
+
+      console.log(list);
       return {
         ...state,
+        Items: list,
       };
     case POST_LOAD_FAILURE:
       return {

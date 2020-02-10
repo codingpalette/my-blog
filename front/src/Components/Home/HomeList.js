@@ -10,12 +10,6 @@ const ListBox = styled.div`
     font-size: 20px;
     text-align: center;
   }
-  &:hover {
-    box-shadow: inset 3px 3px 6px #cbcaca, inset -3px -3px 6px #ffffff;
-    @media (prefers-color-scheme: dark) {
-      box-shadow: inset 4px 4px 7px #171924, inset -2px -2px 5px #353b54;
-    }
-  }
 `;
 
 const CreateDate = styled.div`
@@ -34,13 +28,13 @@ const TextBox = styled.div`
   font-size: 14px;
 `;
 
-const HomeList = ({ title, link, date, text }) => {
+const HomeList = ({ title, category, name, date, description }) => {
   return (
     <>
-      <Link to={link}>
+      <Link to={`/post/${category}/${name}`}>
         <ListBox className="content_box">
           <div>
-            <h2>title</h2>
+            <h2>{title}</h2>
             <CreateDate>
               <FontAwesomeIcon icon={faCalendar} />
               <p>
@@ -48,7 +42,7 @@ const HomeList = ({ title, link, date, text }) => {
               </p>
             </CreateDate>
 
-            <TextBox>{text}</TextBox>
+            <TextBox>{description}</TextBox>
           </div>
         </ListBox>
       </Link>

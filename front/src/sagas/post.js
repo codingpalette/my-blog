@@ -19,7 +19,7 @@ function postaddtAPI(action) {
     .firestore()
     .collection('docs')
     .doc(id)
-    .set({ title, category, description, tags, createdAt });
+    .set({ title, description, tags, createdAt });
   const cid = id + '/content/last';
   firebase
     .firestore()
@@ -50,7 +50,7 @@ function* watchPostAdd() {
 function postloadAPI() {
   return firebase
     .firestore()
-    .collection('post')
+    .collection('docs')
     .get();
 }
 
