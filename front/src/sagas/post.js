@@ -6,6 +6,9 @@ import {
   POST_LOAD_REQUEST,
   POST_LOAD_SUCCESS,
   POST_LOAD_FAILURE,
+  POST_DETAIL_LOAD_REQUEST,
+  POST_DETAIL_LOAD_SUCCESS,
+  POST_DETAIL_LOAD_FAILURE,
 } from '../modules/posts';
 import * as firebase from 'firebase/app';
 
@@ -57,7 +60,7 @@ function postloadAPI() {
 function* postload() {
   try {
     const result = yield call(postloadAPI);
-    console.log(result);
+    // console.log(result);
     yield put({
       type: POST_LOAD_SUCCESS,
       data: result,
@@ -74,6 +77,38 @@ function* watchPostLoad() {
   yield takeLatest(POST_LOAD_REQUEST, postload);
 }
 
+function postdetailloadAPI(action) {
+  return firebase
+    .firestore()
+    .collection('docs')
+    .doc(action)
+    .get();
+}
+
+function* postdetailload(action) {
+  try {
+    const result = yield call(postdetailloadAPI, action.data);
+    console.log(result);
+    yield put({
+      type: POST_DETAIL_LOAD_SUCCESS,
+      data: result,
+    });
+  } catch (e) {
+    yield put({
+      type: POST_DETAIL_LOAD_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* watchPostDetailLoad() {
+  yield takeLatest(POST_DETAIL_LOAD_REQUEST, postdetailload);
+}
+
 export default function* postSaga() {
-  yield all([fork(watchPostAdd), fork(watchPostLoad)]);
+  yield all([
+    fork(watchPostAdd),
+    fork(watchPostLoad),
+    fork(watchPostDetailLoad),
+  ]);
 }
