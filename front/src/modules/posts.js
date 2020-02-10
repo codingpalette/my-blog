@@ -34,7 +34,7 @@ function posts(state = initialState, action) {
         ...state,
       };
     case POST_LOAD_SUCCESS:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
       };

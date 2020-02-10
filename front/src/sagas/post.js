@@ -10,33 +10,27 @@ import {
 import * as firebase from 'firebase/app';
 
 function postaddtAPI(action) {
-  console.log(action);
-  const {
-    title,
-    select,
-    preview,
-    content,
-    CreateDate,
-    createdAt,
-    reserseCreatedAt,
-  } = action;
-  return firebase
+  // console.log(action);
+  const { title, category, name, description, tags, content } = action;
+  const id = category + '_' + name;
+  const createdAt = new Date();
+  const modifiedAt = new Date();
+  firebase
     .firestore()
-    .collection('post')
-    .add({
-      title,
-      select,
-      preview,
-      content,
-      CreateDate,
-      createdAt,
-      reserseCreatedAt,
-    });
+    .collection('docs')
+    .doc(id)
+    .set({ title, category, description, tags, createdAt });
+  const cid = id + '/content/last';
+  firebase
+    .firestore()
+    .collection('docs')
+    .doc(cid)
+    .set({ createdAt, modifiedAt, content });
 }
 
 function* postadd(action) {
   try {
-    console.log(action);
+    // console.log(action);
     yield call(postaddtAPI, action.data);
     yield put({
       type: POST_ADD_SUCCESS,

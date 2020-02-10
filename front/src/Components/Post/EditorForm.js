@@ -12,7 +12,7 @@ import Editor from 'tui-editor';
 // import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 import PostBtnBox from './PostBtnBox';
 
-const InputTitle = styled.input`
+const InputTag = styled.input`
   font-size: 18px;
 `;
 
@@ -22,14 +22,25 @@ const Select = styled.select`
 
 const EditorBox = memo(({ history }) => {
   const [title, setTitle] = useState('');
-  const [select, setSelect] = useState('HTML');
+  const [category, setCategory] = useState('HTML');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState([]);
 
-  const titleCange = e => {
+  const titleChange = e => {
     setTitle(e.target.value);
   };
 
-  const selectChange = e => {
-    setSelect(e.target.value);
+  const categoryChange = e => {
+    setCategory(e.target.value);
+  };
+
+  const nameChange = e => {
+    setName(e.target.value);
+  };
+
+  const descriptionChange = e => {
+    setDescription(e.target.value);
   };
 
   const EditorElement = useRef(null);
@@ -80,35 +91,32 @@ const EditorBox = memo(({ history }) => {
       return;
     }
 
+    if (name === '') {
+      alert('네임을 입력해 주세요.');
+      return;
+    }
+
+    if (description === '') {
+      alert('description을 입력해 주세요.');
+      return;
+    }
+
     if (content === '') {
       alert('내용을 입력해 주세요.');
       return;
     }
 
-    const preview = content.replace(/(<([^>]+)>)/gi, '').substring(0, 300);
-    const today = new Date();
-
-    let Year = today.getFullYear();
-    let Month = '' + (today.getMonth() + 1);
-    let Day = '' + today.getDate();
-
-    if (Month.length < 2) Month = '0' + Month;
-    if (Day.length < 2) Day = '0' + Day;
-
-    const CreateDate = `${Year.toString()}-${Month}-${Day}`;
-    const createdAt = today.getTime();
-    const reserseCreatedAt = -today.getTime();
+    // const preview = content.replace(/(<([^>]+)>)/gi, '').substring(0, 300);
 
     dispatch({
       type: POST_ADD_REQUEST,
       data: {
         title,
-        select,
-        preview,
+        category,
+        name,
+        description,
+        tags,
         content,
-        CreateDate,
-        createdAt,
-        reserseCreatedAt,
       },
     });
     history.push('/');
@@ -117,22 +125,30 @@ const EditorBox = memo(({ history }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="input_box">
-          <InputTitle
-            placeholder="제목을 입력해주세요"
-            value={title}
-            onChange={titleCange}
-          />
-        </div>
+        <InputTag
+          placeholder="제목을 입력해주세요"
+          value={title}
+          onChange={titleChange}
+        />
 
-        <div className="input_box">
-          <Select value={select} onChange={selectChange}>
-            <option vlaue="HTML">HTML</option>
-            <option vlaue="CSS">CSS</option>
-            <option vlaue="JavaScript">JavaScript</option>
-            <option vlaue="React">React</option>
-          </Select>
-        </div>
+        <Select value={category} onChange={categoryChange}>
+          <option vlaue="HTML">HTML</option>
+          <option vlaue="CSS">CSS</option>
+          <option vlaue="JavaScript">JavaScript</option>
+          <option vlaue="React">React</option>
+        </Select>
+
+        <InputTag
+          placeholder="네임을 입력해주세요"
+          value={name}
+          onChange={nameChange}
+        />
+
+        <InputTag
+          placeholder="description"
+          value={description}
+          onChange={descriptionChange}
+        />
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
