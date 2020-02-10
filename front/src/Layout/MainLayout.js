@@ -5,7 +5,7 @@ import Aside from '../Components/Common/Aside';
 import BtnBox from '../Components/Home/BtnBox';
 
 const Section = styled.div`
-  margin-top: 30px;
+  margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
   flex-wrap: wrap;

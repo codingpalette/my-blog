@@ -21,6 +21,12 @@ const FormContainer = styled.div`
   }
 `;
 
+const Input = styled.input`
+  &:focus {
+    outline: 1px solid #6c63ff;
+  }
+`;
+
 const AuthForm = memo(({ location: { pathname }, history }) => {
   const [idvalue, setIdvalue] = useState('');
   const [passvalue, setPassvalue] = useState('');
@@ -118,31 +124,25 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
           <Link to="/">로고</Link>
         </h1>
         <form onSubmit={onSubmit}>
-          <div className="input_box">
-            <input
-              type="text"
-              placeholder="아이디"
-              value={idvalue}
-              onChange={idChange}
-            />
-          </div>
-          <div className="input_box">
-            <input
-              type="password"
-              placeholder="비밀번호"
-              value={passvalue}
-              onChange={passChange}
-            />
-          </div>
+          <Input
+            type="text"
+            placeholder="아이디"
+            value={idvalue}
+            onChange={idChange}
+          />
+          <Input
+            type="password"
+            placeholder="비밀번호"
+            value={passvalue}
+            onChange={passChange}
+          />
           {pathname === '/signup' && (
-            <div className="input_box">
-              <input
-                type="password"
-                placeholder="비밀번호 확인"
-                value={passvalue2}
-                onChange={passChange2}
-              />
-            </div>
+            <Input
+              type="password"
+              placeholder="비밀번호 확인"
+              value={passvalue2}
+              onChange={passChange2}
+            />
           )}
           <div style={{ textAlign: 'right' }}>
             {pathname === '/login' ? (
@@ -167,6 +167,7 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
           <Button
             type="button"
             fullWidth
+            secondary
             style={{ marginTop: '15px' }}
             onClick={googleLogin}
           >
