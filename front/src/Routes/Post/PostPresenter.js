@@ -12,18 +12,21 @@ const LoadingBox = styled.div`
   min-height: 300px;
 `;
 
-const PostPresenter = () => {
+const PostPresenter = ({ viewLoding }) => {
   return (
     <>
       <Suspense fallback={<Header />}>
         <Header />
         <MainLayout>
-          <div className="content_box">
-            <PostView />
-          </div>
-          <LoadingBox>
-            <Oval stroke="#6c63ff" strokeWidth="2" width="50" height="50" />
-          </LoadingBox>
+          {viewLoding ? (
+            <LoadingBox>
+              <Oval stroke="#6c63ff" strokeWidth="2" width="50" height="50" />
+            </LoadingBox>
+          ) : (
+            <div className="content_box">
+              <PostView />
+            </div>
+          )}
         </MainLayout>
       </Suspense>
     </>

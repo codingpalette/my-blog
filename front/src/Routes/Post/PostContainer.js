@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import PostPresenter from './PostPresenter';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { POST_DETAIL_LOAD_REQUEST } from '../../modules/posts';
 
 const PostContainer = ({ location }) => {
+  const { viewLoding } = useSelector(state => state.posts);
   const path = location.pathname.split('/');
   const id = path[2] + '_' + path[3];
   // console.log(id);
@@ -20,7 +21,7 @@ const PostContainer = ({ location }) => {
 
   return (
     <>
-      <PostPresenter />
+      <PostPresenter viewLoding={viewLoding} />
     </>
   );
 };

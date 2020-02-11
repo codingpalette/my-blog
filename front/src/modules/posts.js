@@ -4,6 +4,7 @@ const initialState = {
   TotalCount: null,
   meta: {},
   doc: {},
+  viewLoding: true,
 };
 
 // 액션 type
@@ -18,6 +19,8 @@ export const POST_LOAD_FAILURE = 'POST_LOAD_FAILURE';
 export const POST_DETAIL_LOAD_REQUEST = 'POST_DETAIL_LOAD_REQUEST';
 export const POST_DETAIL_LOAD_SUCCESS = 'POST_DETAIL_LOAD_SUCCESS';
 export const POST_DETAIL_LOAD_FAILURE = 'POST_DETAIL_LOAD_FAILURE';
+
+export const POST_RESET_VIEW_REQUEST = 'POST_RESET_VIEW_REQUEST';
 
 function posts(state = initialState, action) {
   switch (action.type) {
@@ -70,10 +73,18 @@ function posts(state = initialState, action) {
         ...state,
         meta: metaRead.data(),
         doc: docRead.data(),
+        viewLoding: false,
       };
     case POST_DETAIL_LOAD_FAILURE:
       return {
         ...state,
+      };
+    case POST_RESET_VIEW_REQUEST:
+      return {
+        ...state,
+        meta: {},
+        doc: {},
+        viewLoding: true,
       };
     default:
       return state;
