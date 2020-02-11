@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
   body *{ font-family:RIDIBatang;}
   a{text-decoration:none; color:#222;}
   button{background:none; border:none; outline:none; cursor:pointer; padding:0;}
-  .max_box{max-width:1230px; margin:0 auto; padding:0 15px; box-sizing:border-box;}
+  .max_box{max-width:1230px; margin-left:auto; margin-right:auto; padding:0 15px; box-sizing:border-box;}
   .clearfix:after{content:''; display:block; clear:both;}
   .content_box{
     padding: 15px 10px;

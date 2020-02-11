@@ -54,6 +54,7 @@ function postloadAPI() {
   return firebase
     .firestore()
     .collection('docs')
+    .limit(3)
     .get();
 }
 
