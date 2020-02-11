@@ -2,8 +2,8 @@
 const initialState = {
   Items: [],
   TotalCount: null,
-  Title: '',
-  Content: '',
+  meta: {},
+  doc: {},
 };
 
 // 액션 type
@@ -62,11 +62,14 @@ function posts(state = initialState, action) {
         ...state,
       };
     case POST_DETAIL_LOAD_SUCCESS:
-      console.log(action.data.id);
-      console.log(action.data.data());
+      const { metaRead, docRead } = action.data;
+      // console.log(metaRead.data());
+      // console.log(docRead);
 
       return {
         ...state,
+        meta: metaRead.data(),
+        doc: docRead.data(),
       };
     case POST_DETAIL_LOAD_FAILURE:
       return {

@@ -77,7 +77,7 @@ function* watchPostLoad() {
   yield takeLatest(POST_LOAD_REQUEST, postload);
 }
 
-function postdetailloadAPI(action) {
+function metaReadAPI(action) {
   return firebase
     .firestore()
     .collection('docs')
@@ -85,13 +85,21 @@ function postdetailloadAPI(action) {
     .get();
 }
 
-function* postdetailload(action) {
+function docReadAPI(action) {
+  return firebase
+    .firestore()
+    .collection('docs')
+    .doc(`${action}/content/last`)
+    .get();
+}
+
+function* postview(action) {
   try {
-    const result = yield call(postdetailloadAPI, action.data);
-    console.log(result);
+    const metaRead = yield call(metaReadAPI, action.data);
+    const docRead = yield call(docReadAPI, action.data);
     yield put({
       type: POST_DETAIL_LOAD_SUCCESS,
-      data: result,
+      data: { metaRead, docRead },
     });
   } catch (e) {
     yield put({
@@ -101,14 +109,10 @@ function* postdetailload(action) {
   }
 }
 
-function* watchPostDetailLoad() {
-  yield takeLatest(POST_DETAIL_LOAD_REQUEST, postdetailload);
+function* watchPostView() {
+  yield takeLatest(POST_DETAIL_LOAD_REQUEST, postview);
 }
 
 export default function* postSaga() {
-  yield all([
-    fork(watchPostAdd),
-    fork(watchPostLoad),
-    fork(watchPostDetailLoad),
-  ]);
+  yield all([fork(watchPostAdd), fork(watchPostLoad), fork(watchPostView)]);
 }

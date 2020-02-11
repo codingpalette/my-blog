@@ -8,17 +8,19 @@ import { POST_DETAIL_LOAD_REQUEST } from '../../modules/posts';
 const PostContainer = ({ location }) => {
   const path = location.pathname.split('/');
   const id = path[2] + '_' + path[3];
-  console.log(id);
+  // console.log(id);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
       type: POST_DETAIL_LOAD_REQUEST,
       data: id,
     });
-  }, [dispatch]);
+  }, [dispatch, id]);
+
   return (
     <>
-      <PostPresenter></PostPresenter>
+      <PostPresenter />
     </>
   );
 };

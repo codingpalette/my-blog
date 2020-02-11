@@ -8,6 +8,7 @@ import { testApi } from '../../api';
 
 const BtnContainer = styled.div`
   width: 100%;
+  margin-top: 15px;
   margin-bottom: 15px;
   display: flex;
   justify-content: flex-end;
