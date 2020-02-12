@@ -34,6 +34,9 @@ const HeaderNav = styled.nav`
     align-items: center;
     flex-wrap: wrap;
   }
+  ul li {
+    transition: 0.2s;
+  }
   ul li a {
     color: #fff;
     padding: 0 10px;
@@ -49,11 +52,15 @@ const HeaderNav = styled.nav`
     width: 100%;
     background-color: #6c63ff;
     max-height: 0;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
     &.active {
-      max-height: 120px;
+      max-height: 140px;
     }
     ul li {
       width: 100%;
+    }
+    ul li:hover {
+      background-color: #5b54d8;
     }
     ul li a {
       display: block;
@@ -61,7 +68,10 @@ const HeaderNav = styled.nav`
     }
   }
   @media screen and (max-width: 768px) and (prefers-color-scheme: dark) {
-    background-color: #1f2023;
+    background-color: #333;
+    ul li:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
   }
 `;
 
