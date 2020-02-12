@@ -12,14 +12,19 @@ const BtnBox = styled.div`
   }
 `;
 
-const PostBtnBox = () => {
+const PostBtnBox = ({ popupOpenEvent }) => {
+  const onClick = () => {
+    popupOpenEvent();
+  };
   return (
     <>
       <BtnBox>
         <Button to="/" ghost="true">
           취소
         </Button>
-        <Button type="submit">포스트 작성</Button>
+        <Button type="button" onClick={onClick}>
+          포스트 작성
+        </Button>
       </BtnBox>
     </>
   );

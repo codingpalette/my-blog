@@ -16,19 +16,21 @@ import 'highlight.js/styles/github.css';
 import Editor from 'tui-editor';
 // import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 import PostBtnBox from './PostBtnBox';
+import Popup from '../Common/Popup';
 
 registerLocale('ko', ko);
 
 const TitleInput = styled.input`
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
+  color: #212529;
+  margin-bottom: 15px;
   &::placeholder {
     color: #aeb5bd;
   }
-`;
-
-const InputTag = styled.input`
-  font-size: 18px;
+  @media screen and (min-width: 768px) {
+    font-size: 2.75rem;
+  }
 `;
 
 const Select = styled.select`
@@ -42,6 +44,7 @@ const EditorBox = memo(({ history }) => {
   const [description, setDescription] = useState('');
   const [tags] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
+  const [popupToggle, setPopupToggle] = useState(false);
 
   const titleChange = e => {
     setTitle(e.target.value);
@@ -87,6 +90,10 @@ const EditorBox = memo(({ history }) => {
       ],
     });
   }, []);
+
+  const popupOpenEvent = () => {
+    setPopupToggle(true);
+  };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -142,7 +149,11 @@ const EditorBox = memo(({ history }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <TitleInput placeholder="제목을 입력해주세요" />
+        <TitleInput
+          placeholder="제목을 입력해주세요"
+          value={title}
+          onChange={titleChange}
+        />
         {/* <InputTag
           placeholder="제목을 입력해주세요"
           value={title}
@@ -177,7 +188,8 @@ const EditorBox = memo(({ history }) => {
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
-        <PostBtnBox />
+        <PostBtnBox popupOpenEvent={popupOpenEvent} />
+        {popupToggle && <Popup />}
       </form>
     </>
   );

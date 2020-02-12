@@ -17,11 +17,24 @@ const GlobalStyles = createGlobalStyle`
   input{
     border: none;
     width: 100%;
-    display: block;
-    padding: 8px 16px;
+    display: inline-block;
     box-sizing: border-box;
     outline: none;
     border-radius: 0;
+    background-color:transparent;
+  }
+
+  textarea{
+    border: none;
+    overflow: auto;
+    outline: none;
+    box-shadow: none;
+    resize: none; /*remove the resize handle on the bottom right*/
+    background-color:transparent;
+    border-radius: 0;
+    width: 100%;
+    display: inline-block;
+    padding:0;
   }
 
   @media (prefers-color-scheme: dark) {
