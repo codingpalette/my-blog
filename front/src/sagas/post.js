@@ -6,6 +6,9 @@ import {
   POST_LOAD_REQUEST,
   POST_LOAD_SUCCESS,
   POST_LOAD_FAILURE,
+  POST_SCROLL_REQUEST,
+  POST_SCROLL_SUCCESS,
+  POST_SCROLL_FAILURE,
   POST_DETAIL_LOAD_REQUEST,
   POST_DETAIL_LOAD_SUCCESS,
   POST_DETAIL_LOAD_FAILURE,
@@ -54,7 +57,8 @@ function postloadAPI() {
   return firebase
     .firestore()
     .collection('docs')
-    .limit(3)
+    .orderBy('date', 'desc')
+    .limit(10)
     .get();
 }
 
@@ -76,6 +80,36 @@ function* postload() {
 
 function* watchPostLoad() {
   yield takeLatest(POST_LOAD_REQUEST, postload);
+}
+
+function postscrollAPI(action) {
+  return firebase
+    .firestore()
+    .collection('docs')
+    .orderBy('date', 'desc')
+    .startAfter(action.data)
+    .limit(10)
+    .get();
+}
+
+function* postscroll(action) {
+  try {
+    const result = yield call(postscrollAPI, action);
+    // console.log(result);
+    yield put({
+      type: POST_LOAD_SUCCESS,
+      data: result,
+    });
+  } catch (e) {
+    yield put({
+      type: POST_SCROLL_FAILURE,
+      error: e,
+    });
+  }
+}
+
+function* watchPostScroll() {
+  yield takeLatest(POST_SCROLL_REQUEST, postscroll);
 }
 
 function metaReadAPI(action) {
@@ -115,5 +149,10 @@ function* watchPostView() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchPostAdd), fork(watchPostLoad), fork(watchPostView)]);
+  yield all([
+    fork(watchPostAdd),
+    fork(watchPostLoad),
+    fork(watchPostScroll),
+    fork(watchPostView),
+  ]);
 }
