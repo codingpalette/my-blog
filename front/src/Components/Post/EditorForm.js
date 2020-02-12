@@ -19,6 +19,14 @@ import PostBtnBox from './PostBtnBox';
 
 registerLocale('ko', ko);
 
+const TitleInput = styled.input`
+  font-size: 24px;
+  font-weight: bold;
+  &::placeholder {
+    color: #aeb5bd;
+  }
+`;
+
 const InputTag = styled.input`
   font-size: 18px;
 `;
@@ -78,17 +86,7 @@ const EditorBox = memo(({ history }) => {
         'table',
       ],
     });
-
-    // ViewerElement.current = new Viewer({
-    //   el: document.querySelector('#viewer'),
-    //   height: '500px',
-    //   initialValue: '# content to be rendered',
-    // });
   }, []);
-
-  // const onClick = e => {
-  //   console.log(EditorElement.current.getHtml());
-  // };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -126,9 +124,6 @@ const EditorBox = memo(({ history }) => {
     }
 
     const date = yyyy + '-' + mm + '-' + dd;
-
-    // const preview = content.replace(/(<([^>]+)>)/gi, '').substring(0, 300);
-
     dispatch({
       type: POST_ADD_REQUEST,
       data: {
@@ -147,7 +142,8 @@ const EditorBox = memo(({ history }) => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <InputTag
+        <TitleInput placeholder="제목을 입력해주세요" />
+        {/* <InputTag
           placeholder="제목을 입력해주세요"
           value={title}
           onChange={titleChange}
@@ -177,7 +173,7 @@ const EditorBox = memo(({ history }) => {
           placeholder="description"
           value={description}
           onChange={descriptionChange}
-        />
+        /> */}
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
