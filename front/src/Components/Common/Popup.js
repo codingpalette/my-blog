@@ -96,7 +96,7 @@ const UrlInputSpan = styled.span`
 
 const UrlInput = styled.input``;
 
-const Popup = ({ title, popupCloseEvent, children, postPopup }) => {
+const Popup = ({ title, popupCloseEvent, children, postPopup, category }) => {
   const closeClickEvnet = () => {
     popupCloseEvent();
   };
@@ -113,7 +113,7 @@ const Popup = ({ title, popupCloseEvent, children, postPopup }) => {
                 <UrlBox>
                   <UrlStrong>URL 설정</UrlStrong>
                   <UrlInputBox>
-                    <UrlInputSpan>/sdfds/</UrlInputSpan>
+                    <UrlInputSpan>/{category}/</UrlInputSpan>
                     <UrlInput />
                   </UrlInputBox>
                 </UrlBox>
@@ -128,7 +128,7 @@ const Popup = ({ title, popupCloseEvent, children, postPopup }) => {
               <Button type="button" secondary onClick={closeClickEvnet}>
                 취소
               </Button>
-              <Button type="button">저장</Button>
+              <Button type="submit">저장</Button>
             </BtnBox>
           </PopupContent>
         </PopupContainer>

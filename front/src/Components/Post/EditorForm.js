@@ -9,6 +9,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+
 import 'codemirror/lib/codemirror.css';
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
@@ -34,7 +37,12 @@ const TitleInput = styled.input`
 `;
 
 const Select = styled.select`
-  font-size: 18px;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border: 1px solid #d9d9d9;
 `;
 
 const EditorBox = memo(({ history }) => {
@@ -102,52 +110,53 @@ const EditorBox = memo(({ history }) => {
   const onSubmit = e => {
     e.preventDefault();
     const content = EditorElement.current.getHtml();
+    console.log('test');
 
-    if (title === '') {
-      alert('제목을 입력해 주세요.');
-      return;
-    }
+    // if (title === '') {
+    //   alert('제목을 입력해 주세요.');
+    //   return;
+    // }
 
-    if (name === '') {
-      alert('네임을 입력해 주세요.');
-      return;
-    }
+    // if (name === '') {
+    //   alert('네임을 입력해 주세요.');
+    //   return;
+    // }
 
-    if (description === '') {
-      alert('description을 입력해 주세요.');
-      return;
-    }
+    // if (description === '') {
+    //   alert('description을 입력해 주세요.');
+    //   return;
+    // }
 
-    if (content === '') {
-      alert('내용을 입력해 주세요.');
-      return;
-    }
-    let dd = startDate.getDate();
-    let mm = startDate.getMonth() + 1; //January is 0!
-    const yyyy = startDate.getFullYear();
+    // if (content === '') {
+    //   alert('내용을 입력해 주세요.');
+    //   return;
+    // }
+    // let dd = startDate.getDate();
+    // let mm = startDate.getMonth() + 1; //January is 0!
+    // const yyyy = startDate.getFullYear();
 
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
+    // if (dd < 10) {
+    //   dd = '0' + dd;
+    // }
 
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
+    // if (mm < 10) {
+    //   mm = '0' + mm;
+    // }
 
-    const date = yyyy + '-' + mm + '-' + dd;
-    dispatch({
-      type: POST_ADD_REQUEST,
-      data: {
-        title,
-        category,
-        name,
-        description,
-        date,
-        tags,
-        content,
-      },
-    });
-    history.push('/');
+    // const date = yyyy + '-' + mm + '-' + dd;
+    // dispatch({
+    //   type: POST_ADD_REQUEST,
+    //   data: {
+    //     title,
+    //     category,
+    //     name,
+    //     description,
+    //     date,
+    //     tags,
+    //     content,
+    //   },
+    // });
+    // history.push('/');
   };
 
   return (
@@ -158,6 +167,13 @@ const EditorBox = memo(({ history }) => {
           value={title}
           onChange={titleChange}
         />
+        <Select value={category} onChange={categoryChange}>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="javascript">JavaScript</option>
+          <option value="react">React</option>
+        </Select>
+
         {/* <InputTag
           placeholder="제목을 입력해주세요"
           value={title}
@@ -198,6 +214,7 @@ const EditorBox = memo(({ history }) => {
             title="포스트 작성"
             popupCloseEvent={popupCloseEvent}
             postPopup
+            category={category}
           >
             <p>포스트를 작성하시겠습니까?</p>
           </Popup>

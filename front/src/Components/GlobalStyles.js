@@ -25,6 +25,13 @@ const GlobalStyles = createGlobalStyle`
     background-color:transparent;
   }
 
+  select{
+    outline:none;
+    border:none;
+    appearance: none;
+    background-color:transparent;
+  }
+
   textarea{
     border: none;
     overflow: auto;
