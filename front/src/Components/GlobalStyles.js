@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     outline: none;
     border-radius: 0;
+    padding:0;
     background-color:transparent;
   }
 

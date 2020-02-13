@@ -95,6 +95,10 @@ const EditorBox = memo(({ history }) => {
     setPopupToggle(true);
   };
 
+  const popupCloseEvent = () => {
+    setPopupToggle(false);
+  };
+
   const onSubmit = e => {
     e.preventDefault();
     const content = EditorElement.current.getHtml();
@@ -189,7 +193,15 @@ const EditorBox = memo(({ history }) => {
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
         <PostBtnBox popupOpenEvent={popupOpenEvent} />
-        {popupToggle && <Popup />}
+        {popupToggle && (
+          <Popup
+            title="포스트 작성"
+            popupCloseEvent={popupCloseEvent}
+            postPopup
+          >
+            <p>포스트를 작성하시겠습니까?</p>
+          </Popup>
+        )}
       </form>
     </>
   );
