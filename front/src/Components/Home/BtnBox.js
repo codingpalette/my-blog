@@ -18,6 +18,8 @@ const BtnContainer = styled.div`
 `;
 
 const BtnBox = ({ location: { pathname } }) => {
+  const setpathname = pathname.split('/');
+
   const dispatch = useDispatch();
   const logoutEvnet = () => {
     dispatch({
@@ -47,7 +49,10 @@ const BtnBox = ({ location: { pathname } }) => {
             포스트 작성
           </Button>
         ) : (
-          <Button to="/post" color="#6c63ff">
+          <Button
+            to={`/create/${setpathname[2]}/${setpathname[3]}`}
+            color="#6c63ff"
+          >
             포스트 수정
           </Button>
         )}

@@ -36,6 +36,11 @@ const Select = styled.select`
 `;
 
 const EditorBox = memo(({ history }) => {
+  let { pathname } = history.location;
+  pathname = pathname.split('/');
+  if (pathname.length > 2) {
+    console.log('aaaa');
+  }
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('html');
   const [description, setDescription] = useState('');
@@ -162,7 +167,7 @@ const EditorBox = memo(({ history }) => {
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
-        <PostBtnBox popupOpenEvent={popupOpenEvent} />
+        <PostBtnBox popupOpenEvent={popupOpenEvent} pathname={pathname} />
         {popupToggle && (
           <Popup
             title="포스트 작성"
