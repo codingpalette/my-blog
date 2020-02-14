@@ -96,9 +96,25 @@ const UrlInputSpan = styled.span`
 
 const UrlInput = styled.input``;
 
-const Popup = ({ title, popupCloseEvent, children, postPopup, category }) => {
+const Popup = ({
+  title,
+  popupCloseEvent,
+  children,
+  postPopup,
+  category,
+  urlChange,
+  descriptionChange,
+}) => {
   const closeClickEvnet = () => {
     popupCloseEvent();
+  };
+
+  const setUrlChange = e => {
+    urlChange(e);
+  };
+
+  const setDescriptionChange = e => {
+    descriptionChange(e);
   };
 
   return (
@@ -114,12 +130,13 @@ const Popup = ({ title, popupCloseEvent, children, postPopup, category }) => {
                   <UrlStrong>URL 설정</UrlStrong>
                   <UrlInputBox>
                     <UrlInputSpan>/{category}/</UrlInputSpan>
-                    <UrlInput />
+                    <UrlInput onChange={setUrlChange} />
                   </UrlInputBox>
                 </UrlBox>
                 <TextareaBox
                   maxLength="150"
                   placeholder="포스트를 짧게 소개해보세요."
+                  onChange={setDescriptionChange}
                 />
               </PostPopupBox>
             )}

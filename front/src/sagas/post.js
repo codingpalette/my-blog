@@ -16,8 +16,8 @@ import * as firebase from 'firebase/app';
 
 function postaddtAPI(action) {
   // console.log(action);
-  const { title, category, name, description, tags, date, content } = action;
-  const id = category + '_' + name;
+  const { title, category, url, description, tags, date, content } = action;
+  const id = category + '_' + url;
   const createdAt = new Date();
   const modifiedAt = new Date();
   firebase

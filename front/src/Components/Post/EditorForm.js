@@ -4,14 +4,6 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { POST_ADD_REQUEST } from '../../modules/posts';
 
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { registerLocale } from 'react-datepicker';
-import ko from 'date-fns/locale/ko';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-
 import 'codemirror/lib/codemirror.css';
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
@@ -20,8 +12,6 @@ import Editor from 'tui-editor';
 // import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 import PostBtnBox from './PostBtnBox';
 import Popup from '../Common/Popup';
-
-registerLocale('ko', ko);
 
 const TitleInput = styled.input`
   font-size: 2rem;
@@ -48,10 +38,9 @@ const Select = styled.select`
 const EditorBox = memo(({ history }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('html');
-  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [tags] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [url, setUrl] = useState('');
   const [popupToggle, setPopupToggle] = useState(false);
 
   const titleChange = e => {
@@ -62,12 +51,12 @@ const EditorBox = memo(({ history }) => {
     setCategory(e.target.value);
   };
 
-  const nameChange = e => {
-    setName(e.target.value);
-  };
-
   const descriptionChange = e => {
     setDescription(e.target.value);
+  };
+
+  const urlChange = e => {
+    setUrl(e.target.value);
   };
 
   const EditorElement = useRef(null);
@@ -110,53 +99,50 @@ const EditorBox = memo(({ history }) => {
   const onSubmit = e => {
     e.preventDefault();
     const content = EditorElement.current.getHtml();
-    console.log('test');
 
-    // if (title === '') {
-    //   alert('제목을 입력해 주세요.');
-    //   return;
-    // }
+    if (title === '') {
+      alert('제목을 입력해 주세요.');
+      return;
+    }
 
-    // if (name === '') {
-    //   alert('네임을 입력해 주세요.');
-    //   return;
-    // }
+    if (content === '') {
+      alert('내용을 입력해 주세요.');
+      return;
+    }
 
-    // if (description === '') {
-    //   alert('description을 입력해 주세요.');
-    //   return;
-    // }
+    if (url === '') {
+      alert('URL을 입력해 주세요.');
+      return;
+    }
 
-    // if (content === '') {
-    //   alert('내용을 입력해 주세요.');
-    //   return;
-    // }
-    // let dd = startDate.getDate();
-    // let mm = startDate.getMonth() + 1; //January is 0!
-    // const yyyy = startDate.getFullYear();
+    const today = new Date();
 
-    // if (dd < 10) {
-    //   dd = '0' + dd;
-    // }
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    const yyyy = today.getFullYear();
 
-    // if (mm < 10) {
-    //   mm = '0' + mm;
-    // }
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
 
-    // const date = yyyy + '-' + mm + '-' + dd;
-    // dispatch({
-    //   type: POST_ADD_REQUEST,
-    //   data: {
-    //     title,
-    //     category,
-    //     name,
-    //     description,
-    //     date,
-    //     tags,
-    //     content,
-    //   },
-    // });
-    // history.push('/');
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    const date = yyyy + '-' + mm + '-' + dd;
+    dispatch({
+      type: POST_ADD_REQUEST,
+      data: {
+        title,
+        category,
+        url,
+        description,
+        date,
+        tags,
+        content,
+      },
+    });
+    history.push('/');
   };
 
   return (
@@ -174,38 +160,6 @@ const EditorBox = memo(({ history }) => {
           <option value="react">React</option>
         </Select>
 
-        {/* <InputTag
-          placeholder="제목을 입력해주세요"
-          value={title}
-          onChange={titleChange}
-        />
-
-        <Select value={category} onChange={categoryChange}>
-          <option vlaue="html">HTML</option>
-          <option vlaue="css">CSS</option>
-          <option vlaue="javascript">JavaScript</option>
-          <option vlaue="react">React</option>
-        </Select>
-
-        <InputTag
-          placeholder="네임을 입력해주세요"
-          value={name}
-          onChange={nameChange}
-        />
-
-        <DatePicker
-          selected={startDate}
-          dateFormat="yyyy-MM-dd"
-          onChange={date => setStartDate(date)}
-          locale="ko"
-        />
-
-        <InputTag
-          placeholder="description"
-          value={description}
-          onChange={descriptionChange}
-        /> */}
-
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
         <PostBtnBox popupOpenEvent={popupOpenEvent} />
@@ -215,6 +169,8 @@ const EditorBox = memo(({ history }) => {
             popupCloseEvent={popupCloseEvent}
             postPopup
             category={category}
+            urlChange={urlChange}
+            descriptionChange={descriptionChange}
           >
             <p>포스트를 작성하시겠습니까?</p>
           </Popup>
