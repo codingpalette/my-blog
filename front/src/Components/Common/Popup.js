@@ -104,6 +104,8 @@ const Popup = ({
   category,
   urlChange,
   descriptionChange,
+  description,
+  url,
 }) => {
   const closeClickEvnet = () => {
     popupCloseEvent();
@@ -130,13 +132,14 @@ const Popup = ({
                   <UrlStrong>URL 설정</UrlStrong>
                   <UrlInputBox>
                     <UrlInputSpan>/{category}/</UrlInputSpan>
-                    <UrlInput onChange={setUrlChange} />
+                    <UrlInput onChange={setUrlChange} value={url} />
                   </UrlInputBox>
                 </UrlBox>
                 <TextareaBox
                   maxLength="150"
                   placeholder="포스트를 짧게 소개해보세요."
                   onChange={setDescriptionChange}
+                  value={description}
                 />
               </PostPopupBox>
             )}

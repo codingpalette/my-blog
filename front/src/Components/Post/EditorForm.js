@@ -1,8 +1,12 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { POST_ADD_REQUEST } from '../../modules/posts';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  POST_ADD_REQUEST,
+  POST_DETAIL_LOAD_REQUEST,
+  POST_RESET_VIEW_REQUEST,
+} from '../../modules/posts';
 
 import 'codemirror/lib/codemirror.css';
 import 'tui-editor/dist/tui-editor.css';
@@ -35,18 +39,18 @@ const Select = styled.select`
   border: 1px solid #d9d9d9;
 `;
 
-const EditorBox = memo(({ history }) => {
-  let { pathname } = history.location;
-  pathname = pathname.split('/');
-  if (pathname.length > 2) {
-    console.log('aaaa');
-  }
+const EditorBox = memo(({ history, location }) => {
+  const path = location.pathname.split('/');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('html');
   const [description, setDescription] = useState('');
   const [tags] = useState([]);
   const [url, setUrl] = useState('');
   const [popupToggle, setPopupToggle] = useState(false);
+  const [viewContent, setViewContent] = useState('');
+  const [first, setFirst] = useState(true);
+
+  const { meta, doc } = useSelector(state => state.posts);
 
   const titleChange = e => {
     setTitle(e.target.value);
@@ -69,13 +73,33 @@ const EditorBox = memo(({ history }) => {
 
   const dispatch = useDispatch();
 
+  if (path.length > 2) {
+    const id = path[2] + '_' + path[3];
+    useEffect(() => {
+      dispatch({
+        type: POST_DETAIL_LOAD_REQUEST,
+        data: id,
+      });
+    }, [dispatch, id]);
+    useEffect(() => {
+      if (Object.keys(meta).length > 0 && first) {
+        setTitle(meta.title);
+        setCategory(path[2]);
+        setUrl(path[3]);
+        setDescription(meta.description);
+        setViewContent(doc.content);
+        setFirst(false);
+      }
+    }, [meta, doc, path, first]);
+  }
+
   useEffect(() => {
     EditorElement.current = new Editor({
       el: document.querySelector('#editor'),
       initialEditType: 'wysiwyg', // 'markdown'
       previewStyle: 'vertical',
       height: '500px',
-      initialValue: '',
+      initialValue: viewContent,
       exts: [
         {
           name: 'chart',
@@ -91,7 +115,10 @@ const EditorBox = memo(({ history }) => {
         'table',
       ],
     });
-  }, []);
+    dispatch({
+      type: POST_RESET_VIEW_REQUEST,
+    });
+  }, [viewContent, dispatch]);
 
   const popupOpenEvent = () => {
     setPopupToggle(true);
@@ -134,7 +161,16 @@ const EditorBox = memo(({ history }) => {
       mm = '0' + mm;
     }
 
-    const date = yyyy + '-' + mm + '-' + dd;
+    let date, createdAt;
+    if (path.length > 2) {
+      date = meta.date;
+      createdAt = meta.createdAt;
+    } else {
+      date = yyyy + '-' + mm + '-' + dd;
+      createdAt = new Date();
+    }
+    const modifiedAt = new Date();
+
     dispatch({
       type: POST_ADD_REQUEST,
       data: {
@@ -145,6 +181,8 @@ const EditorBox = memo(({ history }) => {
         date,
         tags,
         content,
+        createdAt,
+        modifiedAt,
       },
     });
     history.push('/');
@@ -167,7 +205,7 @@ const EditorBox = memo(({ history }) => {
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
-        <PostBtnBox popupOpenEvent={popupOpenEvent} pathname={pathname} />
+        <PostBtnBox popupOpenEvent={popupOpenEvent} path={path} />
         {popupToggle && (
           <Popup
             title="포스트 작성"
@@ -176,6 +214,8 @@ const EditorBox = memo(({ history }) => {
             category={category}
             urlChange={urlChange}
             descriptionChange={descriptionChange}
+            description={description}
+            url={url}
           >
             <p>포스트를 작성하시겠습니까?</p>
           </Popup>

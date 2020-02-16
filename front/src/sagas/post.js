@@ -16,15 +16,23 @@ import * as firebase from 'firebase/app';
 
 function postaddtAPI(action) {
   // console.log(action);
-  const { title, category, url, description, tags, date, content } = action;
+  const {
+    title,
+    category,
+    url,
+    description,
+    tags,
+    date,
+    content,
+    createdAt,
+    modifiedAt,
+  } = action;
   const id = category + '_' + url;
-  const createdAt = new Date();
-  const modifiedAt = new Date();
   firebase
     .firestore()
     .collection('docs')
     .doc(id)
-    .set({ title, description, tags, createdAt, date });
+    .set({ title, description, tags, createdAt, date, category });
   const cid = id + '/content/last';
   firebase
     .firestore()

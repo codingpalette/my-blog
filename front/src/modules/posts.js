@@ -101,7 +101,7 @@ function posts(state = initialState, action) {
       const aa = [];
       action.data.forEach(v => {
         const item = v.data();
-        console.log(v.id);
+        // console.log(v.id);
         item.id = v.id;
         item.category = v.id.split('_')[0];
         item.name = v.id.split('_')[1];

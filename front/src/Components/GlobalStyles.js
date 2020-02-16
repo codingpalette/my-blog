@@ -30,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
     border:none;
     appearance: none;
     background-color:transparent;
+    border-radius:0;
   }
 
   textarea{
