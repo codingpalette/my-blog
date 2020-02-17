@@ -33,7 +33,7 @@ function postaddtAPI(action) {
     .firestore()
     .collection('docs')
     .doc(id)
-    .set({ title, description, tags, createdAt, date, category });
+    .set({ title, description, tags, createdAt, date, category, url });
   const cid = id + '/content/last';
   firebase
     .firestore()
@@ -129,6 +129,7 @@ function metaReadAPI(action) {
 }
 
 function docReadAPI(action) {
+  console.log(action);
   return firebase
     .firestore()
     .collection('docs')

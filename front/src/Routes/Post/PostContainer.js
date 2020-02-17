@@ -13,7 +13,6 @@ const PostContainer = ({ location }) => {
   const path = location.pathname.split('/');
   const id = path[2] + '_' + path[3];
   // console.log(id);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({

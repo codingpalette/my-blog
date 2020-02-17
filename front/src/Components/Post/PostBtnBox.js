@@ -14,7 +14,6 @@ const BtnBox = styled.div`
 `;
 
 const PostBtnBox = ({ popupOpenEvent, path, postDeleteEvent }) => {
-  console.log(path);
   const onClick = () => {
     popupOpenEvent();
   };

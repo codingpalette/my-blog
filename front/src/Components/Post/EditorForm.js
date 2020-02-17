@@ -54,7 +54,9 @@ const EditorBox = memo(({ history, location }) => {
   const [popupTitle, setPopupTitle] = useState('');
   const [popupText, setPopupText] = useState('');
 
-  const { meta, doc } = useSelector(state => state.posts);
+  const { meta, doc, setId } = useSelector(state => state.posts);
+
+  console.log(setId);
 
   const titleChange = e => {
     setTitle(e.target.value);
@@ -77,25 +79,25 @@ const EditorBox = memo(({ history, location }) => {
 
   const dispatch = useDispatch();
 
-  if (path.length > 2) {
-    const id = path[2] + '_' + path[3];
-    useEffect(() => {
-      dispatch({
-        type: POST_DETAIL_LOAD_REQUEST,
-        data: id,
-      });
-    }, [dispatch, id]);
-    useEffect(() => {
-      if (Object.keys(meta).length > 0 && first) {
-        setTitle(meta.title);
-        setCategory(path[2]);
-        setUrl(path[3]);
-        setDescription(meta.description);
-        setViewContent(doc.content);
-        setFirst(false);
-      }
-    }, [meta, doc, path, first]);
-  }
+  // if (path.length > 2) {
+  //   const id = path[2] + '_' + path[3];
+  //   useEffect(() => {
+  //     dispatch({
+  //       type: POST_DETAIL_LOAD_REQUEST,
+  //       data: id,
+  //     });
+  //   }, [dispatch, id]);
+  //   useEffect(() => {
+  //     if (Object.keys(meta).length > 0 && first) {
+  //       setTitle(meta.title);
+  //       setCategory(path[2]);
+  //       setUrl(path[3]);
+  //       setDescription(meta.description);
+  //       setViewContent(doc.content);
+  //       setFirst(false);
+  //     }
+  //   }, [meta, doc, path, first]);
+  // }
 
   useEffect(() => {
     EditorElement.current = new Editor({

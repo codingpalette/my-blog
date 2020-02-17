@@ -6,6 +6,7 @@ const initialState = {
   doc: {},
   viewLoding: true,
   Last: null,
+  setId: '',
 };
 
 // 액션 type
@@ -28,6 +29,9 @@ export const POST_DETAIL_LOAD_FAILURE = 'POST_DETAIL_LOAD_FAILURE';
 export const POST_DELETE_REQUEST = 'POST_DELETE_REQUEST';
 export const POST_DELETE_SUCCESS = 'POST_DELETE_SUCCESS';
 export const POST_DELETE_FAILURE = 'POST_DELETE_FAILURE';
+
+export const POST_ID_REQUEST = 'POST_ID_REQUEST';
+export const POST_ID_FAILURE = 'POST_ID_FAILURE';
 
 export const POST_RESET_VIEW_REQUEST = 'POST_RESET_VIEW_REQUEST';
 
@@ -77,11 +81,12 @@ function posts(state = initialState, action) {
       };
     case POST_DETAIL_LOAD_SUCCESS:
       const { metaRead, docRead } = action.data;
-      // console.log(metaRead.data());
-      // console.log(docRead);
+      console.log(metaRead.data());
+      console.log(docRead.data());
 
       return {
         ...state,
+
         meta: metaRead.data(),
         doc: docRead.data(),
         viewLoding: false,
@@ -131,6 +136,16 @@ function posts(state = initialState, action) {
     case POST_DELETE_FAILURE:
       return {
         ...state,
+      };
+    case POST_ID_REQUEST:
+      return {
+        ...state,
+        setId: action.data,
+      };
+    case POST_ID_FAILURE:
+      return {
+        ...state,
+        setId: '',
       };
     default:
       return state;

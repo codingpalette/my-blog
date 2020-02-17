@@ -45,12 +45,12 @@ const BtnBox = ({ location: { pathname } }) => {
           로그아웃
         </Button>
         {pathname === '/' ? (
-          <Button to="/create" color="#6c63ff">
+          <Button to="/write" color="#6c63ff">
             포스트 작성
           </Button>
         ) : (
           <Button
-            to={`/create/${setpathname[2]}/${setpathname[3]}`}
+            to={`/write?id=${setpathname[2]}_${setpathname[3]}`}
             color="#6c63ff"
           >
             포스트 수정
