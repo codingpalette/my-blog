@@ -11,6 +11,7 @@ import {
   POST_DETAIL_LOAD_REQUEST,
   POST_DETAIL_LOAD_SUCCESS,
   POST_DETAIL_LOAD_FAILURE,
+  POST_DELETE_REQUEST,
 } from '../modules/posts';
 import * as firebase from 'firebase/app';
 
@@ -155,11 +156,32 @@ function* watchPostView() {
   yield takeLatest(POST_DETAIL_LOAD_REQUEST, postview);
 }
 
+function postdeleteAPI(action) {
+  return firebase
+    .firestore()
+    .collection('docs')
+    .doc(action)
+    .delete();
+}
+
+function* postdelete(action) {
+  try {
+    yield call(postdeleteAPI, action.data);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function* watchPostDelete() {
+  yield takeLatest(POST_DELETE_REQUEST, postdelete);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchPostAdd),
     fork(watchPostLoad),
     fork(watchPostScroll),
     fork(watchPostView),
+    fork(watchPostDelete),
   ]);
 }

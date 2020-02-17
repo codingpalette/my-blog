@@ -6,6 +6,7 @@ import {
   POST_ADD_REQUEST,
   POST_DETAIL_LOAD_REQUEST,
   POST_RESET_VIEW_REQUEST,
+  POST_DELETE_REQUEST,
 } from '../../modules/posts';
 
 import 'codemirror/lib/codemirror.css';
@@ -49,6 +50,9 @@ const EditorBox = memo(({ history, location }) => {
   const [popupToggle, setPopupToggle] = useState(false);
   const [viewContent, setViewContent] = useState('');
   const [first, setFirst] = useState(true);
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [popupTitle, setPopupTitle] = useState('');
+  const [popupText, setPopupText] = useState('');
 
   const { meta, doc } = useSelector(state => state.posts);
 
@@ -121,11 +125,33 @@ const EditorBox = memo(({ history, location }) => {
   }, [viewContent, dispatch]);
 
   const popupOpenEvent = () => {
+    path.length > 2
+      ? setPopupTitle('포스트 수정')
+      : setPopupTitle('포스트 작성');
+    path.length > 2
+      ? setPopupText('포스트를 수정하시겠습니까?')
+      : setPopupText('포스트를 작성하시겠습니까?');
     setPopupToggle(true);
+    setDeleteMode(false);
   };
 
   const popupCloseEvent = () => {
     setPopupToggle(false);
+  };
+
+  const postDeleteEvent = () => {
+    setPopupTitle('포스트 삭제');
+    setPopupText('포스트를 삭제하시겠습니까?');
+    setPopupToggle(true);
+    setDeleteMode(true);
+  };
+
+  const postDelete = () => {
+    dispatch({
+      type: POST_DELETE_REQUEST,
+      data: path[2] + '_' + path[3],
+    });
+    history.push('/');
   };
 
   const onSubmit = e => {
@@ -205,10 +231,14 @@ const EditorBox = memo(({ history, location }) => {
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
-        <PostBtnBox popupOpenEvent={popupOpenEvent} path={path} />
+        <PostBtnBox
+          popupOpenEvent={popupOpenEvent}
+          path={path}
+          postDeleteEvent={postDeleteEvent}
+        />
         {popupToggle && (
           <Popup
-            title="포스트 작성"
+            title={popupTitle}
             popupCloseEvent={popupCloseEvent}
             postPopup
             category={category}
@@ -216,8 +246,10 @@ const EditorBox = memo(({ history, location }) => {
             descriptionChange={descriptionChange}
             description={description}
             url={url}
+            deleteMode={deleteMode}
+            postDelete={postDelete}
           >
-            <p>포스트를 작성하시겠습니까?</p>
+            {popupText}
           </Popup>
         )}
       </form>

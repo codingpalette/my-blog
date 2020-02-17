@@ -25,6 +25,10 @@ export const POST_DETAIL_LOAD_REQUEST = 'POST_DETAIL_LOAD_REQUEST';
 export const POST_DETAIL_LOAD_SUCCESS = 'POST_DETAIL_LOAD_SUCCESS';
 export const POST_DETAIL_LOAD_FAILURE = 'POST_DETAIL_LOAD_FAILURE';
 
+export const POST_DELETE_REQUEST = 'POST_DELETE_REQUEST';
+export const POST_DELETE_SUCCESS = 'POST_DELETE_SUCCESS';
+export const POST_DELETE_FAILURE = 'POST_DELETE_FAILURE';
+
 export const POST_RESET_VIEW_REQUEST = 'POST_RESET_VIEW_REQUEST';
 
 function posts(state = initialState, action) {
@@ -113,6 +117,18 @@ function posts(state = initialState, action) {
         Last: action.data.docs[action.data.docs.length - 1],
       };
     case POST_SCROLL_FAILURE:
+      return {
+        ...state,
+      };
+    case POST_DELETE_REQUEST:
+      return {
+        ...state,
+      };
+    case POST_DELETE_SUCCESS:
+      return {
+        ...state,
+      };
+    case POST_DELETE_FAILURE:
       return {
         ...state,
       };

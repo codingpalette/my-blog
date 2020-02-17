@@ -106,6 +106,8 @@ const Popup = ({
   descriptionChange,
   description,
   url,
+  deleteMode,
+  postDelete,
 }) => {
   const closeClickEvnet = () => {
     popupCloseEvent();
@@ -119,6 +121,10 @@ const Popup = ({
     descriptionChange(e);
   };
 
+  const deleteClick = () => {
+    postDelete();
+  };
+
   return (
     <>
       <PopupBox>
@@ -126,7 +132,7 @@ const Popup = ({
         <PopupContainer>
           <PopupContent>
             <Title>{title}</Title>
-            {postPopup && (
+            {postPopup && !deleteMode && (
               <PostPopupBox>
                 <UrlBox>
                   <UrlStrong>URL 설정</UrlStrong>
@@ -148,7 +154,13 @@ const Popup = ({
               <Button type="button" secondary onClick={closeClickEvnet}>
                 취소
               </Button>
-              <Button type="submit">저장</Button>
+              {!deleteMode ? (
+                <Button type="submit">확인</Button>
+              ) : (
+                <Button type="button" onClick={deleteClick}>
+                  삭제
+                </Button>
+              )}
             </BtnBox>
           </PopupContent>
         </PopupContainer>
