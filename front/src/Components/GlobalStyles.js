@@ -46,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
     padding:0;
   }
 
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     body {
       background-color: #212121;
     }
@@ -57,16 +57,16 @@ const GlobalStyles = createGlobalStyle`
       color:#fff;
     }
 
-  }
+  } */
   .max_box{max-width:1230px; margin-left:auto; margin-right:auto; padding:0 15px; box-sizing:border-box;}
   .clearfix:after{content:''; display:block; clear:both;}
   .content_box{
     padding: 15px 10px;
     box-sizing: border-box;
     
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
       background-color: #333;
-    }
+    } */
     background-color: #fff;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12),
       0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12),

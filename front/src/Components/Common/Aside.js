@@ -40,9 +40,9 @@ const AsideBox = styled.aside`
     padding: 10px 0;
     color: #000;
     font-size: 18px;
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
       color: #ddd;
-    }
+    } */
   }
   .description {
     font-size: 12px;
@@ -69,9 +69,9 @@ const AsideBox = styled.aside`
   .tag_box span.num {
     color: #000;
     transition: 0.2s;
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
       color: #fff;
-    }
+    } */
   }
   .tag_box span.txt {
     font-size: 14px;

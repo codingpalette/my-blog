@@ -12,9 +12,9 @@ const HeaderBox = styled.header`
   background-color: #6c63ff;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  @media (prefers-color-scheme: dark) {
+  /* @media (prefers-color-scheme: dark) {
     background-color: #333;
-  }
+  } */
 `;
 
 const HeaderContent = styled.div`
@@ -67,12 +67,12 @@ const HeaderNav = styled.nav`
       padding: 10px;
     }
   }
-  @media screen and (max-width: 768px) and (prefers-color-scheme: dark) {
+  /* @media screen and (max-width: 768px) and (prefers-color-scheme: dark) {
     background-color: #333;
     ul li:hover {
       background-color: rgba(255, 255, 255, 0.08);
     }
-  }
+  } */
 `;
 
 const HeaderNavBtn = styled.button`
