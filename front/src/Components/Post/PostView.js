@@ -11,6 +11,10 @@ import 'highlight.js/styles/github.css';
 // import Editor from 'tui-editor';
 import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 
+const PostViewContainer = styled.div`
+  margin-bottom: 15px;
+`;
+
 const Title = styled.h2`
   font-size: 20px;
   text-align: center;
@@ -43,7 +47,7 @@ const PostView = () => {
   }, [content]);
   return (
     <>
-      <div>
+      <PostViewContainer>
         <Title>{title}</Title>
         <DateBox>
           <FontAwesomeIcon icon={faCalendar} />
@@ -52,7 +56,7 @@ const PostView = () => {
           </p>
         </DateBox>
         <div id="viewer"></div>
-      </div>
+      </PostViewContainer>
     </>
   );
 };

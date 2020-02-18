@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from '../../Components/Common/Header';
 import { Oval } from 'svg-loaders-react';
 import MainLayout from '../../Layout/MainLayout';
-import PostView from '../../Components/Post/PostView';
+import PostViewLayout from '../../Layout/PostViewLayout';
 
 const LoadingBox = styled.div`
   display: flex;
@@ -23,9 +23,7 @@ const PostPresenter = ({ viewLoding }) => {
               <Oval stroke="#6c63ff" strokeWidth="2" width="50" height="50" />
             </LoadingBox>
           ) : (
-            <div className="content_box">
-              <PostView />
-            </div>
+            <PostViewLayout />
           )}
         </MainLayout>
       </Suspense>

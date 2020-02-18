@@ -44,7 +44,7 @@ const Tag = styled.span`
   margin-top: 10px;
   cursor: pointer;
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
   }
 `;
 

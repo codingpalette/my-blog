@@ -16,12 +16,14 @@ const PostContainer = ({ location }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
-      type: POST_RESET_VIEW_REQUEST,
-    });
-    dispatch({
       type: POST_DETAIL_LOAD_REQUEST,
       data: id,
     });
+    return () => {
+      dispatch({
+        type: POST_RESET_VIEW_REQUEST,
+      });
+    };
   }, [dispatch, id]);
 
   return (
