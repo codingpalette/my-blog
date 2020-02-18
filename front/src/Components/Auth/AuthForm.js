@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,12 +22,29 @@ const FormContainer = styled.div`
 `;
 
 const Input = styled.input`
+  padding: 5px 10px;
+  background-color: #edf2f7;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  color: #4a5568;
   &:focus {
-    outline: 1px solid #6c63ff;
+    border: 1px solid #6c63ff;
+  }
+  & + & {
+    margin-top: 10px;
   }
 `;
 
-const AuthForm = memo(({ location: { pathname }, history }) => {
+const BtnBox = styled.div`
+  margin: 15px 0;
+  text-align: right;
+  button {
+    font-size: 0.8rem;
+  }
+`;
+
+const AuthForm = ({ location: { pathname }, history }) => {
   const [idvalue, setIdvalue] = useState('');
   const [passvalue, setPassvalue] = useState('');
   const [passvalue2, setPassvalue2] = useState('');
@@ -35,15 +52,15 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
   const { isSignup, isAuthError } = useSelector(state => state.auths);
   const dispatch = useDispatch();
 
-  const idChange = e => {
+  const idChange = useCallback(e => {
     setIdvalue(e.target.value);
-  };
-  const passChange = e => {
+  }, []);
+  const passChange = useCallback(e => {
     setPassvalue(e.target.value);
-  };
-  const passChange2 = e => {
+  }, []);
+  const passChange2 = useCallback(e => {
     setPassvalue2(e.target.value);
-  };
+  }, []);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -144,25 +161,19 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
               onChange={passChange2}
             />
           )}
-          <div style={{ textAlign: 'right' }}>
+          <BtnBox>
             {pathname === '/login' ? (
               <Button to={'/signup'} style={{ fontSize: '12px' }}>
                 회원가입
               </Button>
             ) : (
-              <Button to={'/login'} style={{ fontSize: '12px' }}>
-                로그인
-              </Button>
+              <Button to={'/login'}>로그인</Button>
             )}
-          </div>
+          </BtnBox>
           {pathname === '/login' ? (
-            <Button fullWidth style={{ marginTop: '15px' }}>
-              로그인
-            </Button>
+            <Button fullWidth>로그인</Button>
           ) : (
-            <Button fullWidth style={{ marginTop: '15px' }}>
-              회원가입
-            </Button>
+            <Button fullWidth>회원가입</Button>
           )}
           <Button
             type="button"
@@ -178,6 +189,6 @@ const AuthForm = memo(({ location: { pathname }, history }) => {
       </FormContainer>
     </>
   );
-});
+};
 
-export default withRouter(AuthForm);
+export default withRouter(memo(AuthForm));

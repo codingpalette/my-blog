@@ -76,6 +76,9 @@ const buttonStyle = css`
       css`
         width: 100%;
         display: block;
+        & + & {
+          margin-top: 15px;
+        }
       `}
 `;
 
