@@ -4,7 +4,7 @@ const GlobalStyles = createGlobalStyle`
   ${reset};
   @font-face { font-family: 'RIDIBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-  body{background-color: #fafafa;  }
+  body{background-color: #eee;  }
 
   html,body,th,td,input,select,textarea,button {
     font-size:14px;

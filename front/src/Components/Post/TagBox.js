@@ -1,16 +1,26 @@
 import React, { useState, memo, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import Button from '../Common/Button';
 
 const TagBoxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   width: 100%;
   margin-top: 15px;
-  border: 1px solid #ddd;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
 `;
 
 const TagForm = styled.form`
   overflow: hidden;
   display: flex;
   width: 256px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 15px;
+  border-bottom: 1px solid #6c63ff;
   input,
   button {
     font-size: 1rem;
@@ -19,20 +29,28 @@ const TagForm = styled.form`
     padding: 0.5rem;
     flex: 1;
     min-width: 0;
+    line-height: 1;
   }
 `;
 
-const Tag = styled.div`
-  margin-right: 0.5rem;
+const Tag = styled.span`
+  padding: 10px 15px;
+  background-color: #edf2f7;
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1;
+  border-radius: 15px;
+  margin-right: 10px;
+  margin-top: 10px;
   cursor: pointer;
   &:hover {
     opacity: 0.5;
   }
 `;
 
-const TagListBlock = styled.div`
+const TagListContainer = styled.div`
   display: flex;
-  margin-top: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 // memo를 사용하여 tag 값이 바뀔 때만 리렌더링되도록 처리
@@ -42,11 +60,11 @@ const TagItem = memo(({ tag, onRemove }) => (
 
 // memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
 const TagList = memo(({ tags, onRemove }) => (
-  <TagListBlock>
+  <TagListContainer>
     {tags.map(tag => (
       <TagItem key={tag} tag={tag} onRemove={onRemove} />
     ))}
-  </TagListBlock>
+  </TagListContainer>
 ));
 
 const TagBox = ({ onChangeTags, tags }) => {
@@ -101,7 +119,9 @@ const TagBox = ({ onChangeTags, tags }) => {
             onChange={onChange}
             placeholder="태그를 입력하세요"
           />
-          <button type="submit">추가</button>
+          <Button type="submit" ghost="true">
+            추가
+          </Button>
         </TagForm>
         <TagList tags={localTags} onRemove={onRemove} />
       </TagBoxContainer>
