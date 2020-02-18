@@ -81,8 +81,8 @@ function posts(state = initialState, action) {
       };
     case POST_DETAIL_LOAD_SUCCESS:
       const { metaRead, docRead } = action.data;
-      console.log(metaRead.data());
-      console.log(docRead.data());
+      // console.log(metaRead.data());
+      // console.log(docRead.data());
 
       return {
         ...state,

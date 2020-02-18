@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   POST_ADD_REQUEST,
-  POST_DETAIL_LOAD_REQUEST,
   POST_RESET_VIEW_REQUEST,
   POST_DELETE_REQUEST,
 } from '../../modules/posts';
@@ -41,7 +40,6 @@ const Select = styled.select`
 `;
 
 const EditorBox = memo(({ history, location }) => {
-  const path = location.pathname.split('/');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('html');
   const [description, setDescription] = useState('');
@@ -49,14 +47,13 @@ const EditorBox = memo(({ history, location }) => {
   const [url, setUrl] = useState('');
   const [popupToggle, setPopupToggle] = useState(false);
   const [viewContent, setViewContent] = useState('');
-  const [first, setFirst] = useState(true);
   const [deleteMode, setDeleteMode] = useState(false);
   const [popupTitle, setPopupTitle] = useState('');
   const [popupText, setPopupText] = useState('');
 
   const { meta, doc, setId } = useSelector(state => state.posts);
 
-  console.log(setId);
+  console.log(meta);
 
   const titleChange = e => {
     setTitle(e.target.value);
@@ -100,6 +97,16 @@ const EditorBox = memo(({ history, location }) => {
   // }
 
   useEffect(() => {
+    if (setId && Object.keys(meta).length > 0) {
+      setTitle(meta.title);
+      setCategory(meta.category);
+      setUrl(meta.url);
+      setDescription(meta.description);
+      setViewContent(doc.content);
+    }
+  }, [setId, meta, doc]);
+
+  useEffect(() => {
     EditorElement.current = new Editor({
       el: document.querySelector('#editor'),
       initialEditType: 'wysiwyg', // 'markdown'
@@ -121,16 +128,14 @@ const EditorBox = memo(({ history, location }) => {
         'table',
       ],
     });
-    dispatch({
-      type: POST_RESET_VIEW_REQUEST,
-    });
+    // dispatch({
+    //   type: POST_RESET_VIEW_REQUEST,
+    // });
   }, [viewContent, dispatch]);
 
   const popupOpenEvent = () => {
-    path.length > 2
-      ? setPopupTitle('포스트 수정')
-      : setPopupTitle('포스트 작성');
-    path.length > 2
+    setId ? setPopupTitle('포스트 수정') : setPopupTitle('포스트 작성');
+    setId
       ? setPopupText('포스트를 수정하시겠습니까?')
       : setPopupText('포스트를 작성하시겠습니까?');
     setPopupToggle(true);
@@ -151,7 +156,7 @@ const EditorBox = memo(({ history, location }) => {
   const postDelete = () => {
     dispatch({
       type: POST_DELETE_REQUEST,
-      data: path[2] + '_' + path[3],
+      data: setId,
     });
     history.push('/');
   };
@@ -190,7 +195,8 @@ const EditorBox = memo(({ history, location }) => {
     }
 
     let date, createdAt;
-    if (path.length > 2) {
+    if (setId) {
+      console.log(meta);
       date = meta.date;
       createdAt = meta.createdAt;
     } else {
@@ -213,7 +219,7 @@ const EditorBox = memo(({ history, location }) => {
         modifiedAt,
       },
     });
-    history.push('/');
+    // history.push('/');
   };
 
   return (
@@ -235,7 +241,6 @@ const EditorBox = memo(({ history, location }) => {
         {/* <div id="viewer"></div> */}
         <PostBtnBox
           popupOpenEvent={popupOpenEvent}
-          path={path}
           postDeleteEvent={postDeleteEvent}
         />
         {popupToggle && (

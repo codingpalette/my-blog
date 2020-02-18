@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../Common/Button';
 
@@ -13,7 +14,8 @@ const BtnBox = styled.div`
   }
 `;
 
-const PostBtnBox = ({ popupOpenEvent, path, postDeleteEvent }) => {
+const PostBtnBox = memo(({ popupOpenEvent, postDeleteEvent }) => {
+  const { setId } = useSelector(state => state.posts);
   const onClick = () => {
     popupOpenEvent();
   };
@@ -27,9 +29,9 @@ const PostBtnBox = ({ popupOpenEvent, path, postDeleteEvent }) => {
           취소
         </Button>
         <Button type="button" onClick={onClick}>
-          {path.length > 2 ? '포스트 수정' : '포스트 작성'}
+          {setId ? '포스트 수정' : '포스트 작성'}
         </Button>
-        {path.length > 2 && (
+        {setId && (
           <Button type="button" secondary onClick={deleteClick}>
             포스트 삭제
           </Button>
@@ -37,6 +39,6 @@ const PostBtnBox = ({ popupOpenEvent, path, postDeleteEvent }) => {
       </BtnBox>
     </>
   );
-};
+});
 
 export default PostBtnBox;
