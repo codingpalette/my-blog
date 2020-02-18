@@ -94,7 +94,9 @@ const UrlInputSpan = styled.span`
   color: rgb(134, 142, 150);
 `;
 
-const UrlInput = styled.input``;
+const UrlInput = styled.input`
+  pointer-events: ${props => (props.value !== '' ? 'none' : 'auto')};
+`;
 
 const Popup = ({
   title,

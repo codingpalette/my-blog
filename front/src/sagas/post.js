@@ -129,7 +129,7 @@ function metaReadAPI(action) {
 }
 
 function docReadAPI(action) {
-  console.log(action);
+  // console.log(action);
   return firebase
     .firestore()
     .collection('docs')

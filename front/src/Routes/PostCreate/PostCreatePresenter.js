@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../Components/Common/Header';
 const PostCreateLayout = lazy(() => import('../../Layout/PostCreateLayout'));
 

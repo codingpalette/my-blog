@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import PostCreatePresenter from './PostCreatePresenter';
 import {
   POST_ID_REQUEST,
-  POST_ID_FAILURE,
   POST_DETAIL_LOAD_REQUEST,
+  POST_RESET_VIEW_REQUEST,
 } from '../../modules/posts';
 
 const PostCreateContainer = ({ history, location: { search } }) => {
@@ -30,20 +30,20 @@ const PostCreateContainer = ({ history, location: { search } }) => {
       return params;
     }
     // console.log(getUrlParams().id);
+
     dispatch({
       type: POST_ID_REQUEST,
       data: getUrlParams().id,
     });
     return () => {
       dispatch({
-        type: POST_ID_FAILURE,
+        type: POST_RESET_VIEW_REQUEST,
       });
     };
   }, [search, dispatch]);
 
   useEffect(() => {
     if (setId) {
-      console.log('aaa');
       dispatch({
         type: POST_DETAIL_LOAD_REQUEST,
         data: setId,

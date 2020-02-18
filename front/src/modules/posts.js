@@ -100,6 +100,7 @@ function posts(state = initialState, action) {
         ...state,
         meta: {},
         doc: {},
+        setId: '',
         viewLoding: true,
       };
     case POST_SCROLL_REQUEST:
@@ -145,7 +146,6 @@ function posts(state = initialState, action) {
     case POST_ID_FAILURE:
       return {
         ...state,
-        setId: '',
       };
     default:
       return state;

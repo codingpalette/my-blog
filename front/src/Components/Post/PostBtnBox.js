@@ -14,7 +14,7 @@ const BtnBox = styled.div`
   }
 `;
 
-const PostBtnBox = memo(({ popupOpenEvent, postDeleteEvent }) => {
+const PostBtnBox = ({ popupOpenEvent, postDeleteEvent }) => {
   const { setId } = useSelector(state => state.posts);
   const onClick = () => {
     popupOpenEvent();
@@ -39,6 +39,6 @@ const PostBtnBox = memo(({ popupOpenEvent, postDeleteEvent }) => {
       </BtnBox>
     </>
   );
-});
+};
 
-export default PostBtnBox;
+export default memo(PostBtnBox);

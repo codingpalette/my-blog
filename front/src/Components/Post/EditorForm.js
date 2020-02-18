@@ -1,12 +1,8 @@
-import React, { useState, useRef, useEffect, memo } from 'react';
+import React, { useState, useRef, useEffect, memo, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  POST_ADD_REQUEST,
-  POST_RESET_VIEW_REQUEST,
-  POST_DELETE_REQUEST,
-} from '../../modules/posts';
+import { POST_ADD_REQUEST, POST_DELETE_REQUEST } from '../../modules/posts';
 
 import 'codemirror/lib/codemirror.css';
 import 'tui-editor/dist/tui-editor.css';
@@ -39,7 +35,7 @@ const Select = styled.select`
   border: 1px solid #d9d9d9;
 `;
 
-const EditorBox = memo(({ history, location }) => {
+const EditorBox = ({ history }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('html');
   const [description, setDescription] = useState('');
@@ -53,48 +49,26 @@ const EditorBox = memo(({ history, location }) => {
 
   const { meta, doc, setId } = useSelector(state => state.posts);
 
-  console.log(meta);
-
-  const titleChange = e => {
+  const titleChange = useCallback(e => {
     setTitle(e.target.value);
-  };
+  }, []);
 
-  const categoryChange = e => {
+  const categoryChange = useCallback(e => {
     setCategory(e.target.value);
-  };
+  }, []);
 
-  const descriptionChange = e => {
+  const descriptionChange = useCallback(e => {
     setDescription(e.target.value);
-  };
+  }, []);
 
-  const urlChange = e => {
+  const urlChange = useCallback(e => {
     setUrl(e.target.value);
-  };
+  }, []);
 
   const EditorElement = useRef(null);
   // const ViewerElement = useRef(null);
 
   const dispatch = useDispatch();
-
-  // if (path.length > 2) {
-  //   const id = path[2] + '_' + path[3];
-  //   useEffect(() => {
-  //     dispatch({
-  //       type: POST_DETAIL_LOAD_REQUEST,
-  //       data: id,
-  //     });
-  //   }, [dispatch, id]);
-  //   useEffect(() => {
-  //     if (Object.keys(meta).length > 0 && first) {
-  //       setTitle(meta.title);
-  //       setCategory(path[2]);
-  //       setUrl(path[3]);
-  //       setDescription(meta.description);
-  //       setViewContent(doc.content);
-  //       setFirst(false);
-  //     }
-  //   }, [meta, doc, path, first]);
-  // }
 
   useEffect(() => {
     if (setId && Object.keys(meta).length > 0) {
@@ -128,9 +102,6 @@ const EditorBox = memo(({ history, location }) => {
         'table',
       ],
     });
-    // dispatch({
-    //   type: POST_RESET_VIEW_REQUEST,
-    // });
   }, [viewContent, dispatch]);
 
   const popupOpenEvent = () => {
@@ -142,15 +113,15 @@ const EditorBox = memo(({ history, location }) => {
     setDeleteMode(false);
   };
 
-  const popupCloseEvent = () => {
-    setPopupToggle(false);
-  };
-
   const postDeleteEvent = () => {
     setPopupTitle('포스트 삭제');
     setPopupText('포스트를 삭제하시겠습니까?');
     setPopupToggle(true);
     setDeleteMode(true);
+  };
+
+  const popupCloseEvent = () => {
+    setPopupToggle(false);
   };
 
   const postDelete = () => {
@@ -196,7 +167,6 @@ const EditorBox = memo(({ history, location }) => {
 
     let date, createdAt;
     if (setId) {
-      console.log(meta);
       date = meta.date;
       createdAt = meta.createdAt;
     } else {
@@ -219,7 +189,7 @@ const EditorBox = memo(({ history, location }) => {
         modifiedAt,
       },
     });
-    // history.push('/');
+    history.push('/');
   };
 
   return (
@@ -262,6 +232,6 @@ const EditorBox = memo(({ history, location }) => {
       </form>
     </>
   );
-});
+};
 
-export default withRouter(EditorBox);
+export default withRouter(memo(EditorBox));
