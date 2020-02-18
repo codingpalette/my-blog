@@ -110,7 +110,12 @@ const Popup = ({
   url,
   deleteMode,
   postDelete,
+  onSubmit,
 }) => {
+  const submitClick = () => {
+    onSubmit();
+  };
+
   const closeClickEvnet = () => {
     popupCloseEvent();
   };
@@ -157,7 +162,9 @@ const Popup = ({
                 취소
               </Button>
               {!deleteMode ? (
-                <Button type="submit">확인</Button>
+                <Button type="button" onClick={submitClick}>
+                  확인
+                </Button>
               ) : (
                 <Button type="button" onClick={deleteClick}>
                   삭제

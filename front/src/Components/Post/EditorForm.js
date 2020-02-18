@@ -10,6 +10,8 @@ import 'tui-editor/dist/tui-editor-contents.css';
 import 'highlight.js/styles/github.css';
 import Editor from 'tui-editor';
 // import Viewer from 'tui-editor/dist/tui-editor-Viewer';
+
+import TagBox from './TagBox';
 import PostBtnBox from './PostBtnBox';
 import Popup from '../Common/Popup';
 
@@ -39,7 +41,7 @@ const EditorBox = ({ history }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('html');
   const [description, setDescription] = useState('');
-  const [tags] = useState([]);
+  const [tags, setTags] = useState([]);
   const [url, setUrl] = useState('');
   const [popupToggle, setPopupToggle] = useState(false);
   const [viewContent, setViewContent] = useState('');
@@ -65,6 +67,10 @@ const EditorBox = ({ history }) => {
     setUrl(e.target.value);
   }, []);
 
+  const onChangeTags = useCallback(e => {
+    setTags([...e]);
+  });
+
   const EditorElement = useRef(null);
   // const ViewerElement = useRef(null);
 
@@ -77,6 +83,8 @@ const EditorBox = ({ history }) => {
       setUrl(meta.url);
       setDescription(meta.description);
       setViewContent(doc.content);
+      setTags([...meta.tags]);
+      console.log(meta);
     }
   }, [setId, meta, doc]);
 
@@ -132,8 +140,8 @@ const EditorBox = ({ history }) => {
     history.push('/');
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
+  const onSubmit = () => {
+    // e.preventDefault();
     // const content = EditorElement.current.getHtml();
     const content = EditorElement.current.getMarkdown();
 
@@ -210,27 +218,29 @@ const EditorBox = ({ history }) => {
 
         <div id="editor"></div>
         {/* <div id="viewer"></div> */}
-        <PostBtnBox
-          popupOpenEvent={popupOpenEvent}
-          postDeleteEvent={postDeleteEvent}
-        />
-        {popupToggle && (
-          <Popup
-            title={popupTitle}
-            popupCloseEvent={popupCloseEvent}
-            postPopup
-            category={category}
-            urlChange={urlChange}
-            descriptionChange={descriptionChange}
-            description={description}
-            url={url}
-            deleteMode={deleteMode}
-            postDelete={postDelete}
-          >
-            {popupText}
-          </Popup>
-        )}
       </form>
+      <TagBox onChangeTags={onChangeTags} tags={tags} />
+      <PostBtnBox
+        popupOpenEvent={popupOpenEvent}
+        postDeleteEvent={postDeleteEvent}
+      />
+      {popupToggle && (
+        <Popup
+          title={popupTitle}
+          popupCloseEvent={popupCloseEvent}
+          postPopup
+          category={category}
+          urlChange={urlChange}
+          descriptionChange={descriptionChange}
+          description={description}
+          url={url}
+          deleteMode={deleteMode}
+          postDelete={postDelete}
+          onSubmit={onSubmit}
+        >
+          {popupText}
+        </Popup>
+      )}
     </>
   );
 };
