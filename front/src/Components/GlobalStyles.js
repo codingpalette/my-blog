@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
 
   body{background-color: #fafafa;  }
 
-  body,th,td,input,select,textarea,button {
+  html,body,th,td,input,select,textarea,button {
     font-size:14px;
     line-height:1.5;
     font-family:'RIDIBatang';

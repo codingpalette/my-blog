@@ -134,7 +134,8 @@ const EditorBox = ({ history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const content = EditorElement.current.getHtml();
+    // const content = EditorElement.current.getHtml();
+    const content = EditorElement.current.getMarkdown();
 
     if (title === '') {
       alert('제목을 입력해 주세요.');

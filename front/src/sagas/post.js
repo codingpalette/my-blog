@@ -65,7 +65,7 @@ function postloadAPI() {
   return firebase
     .firestore()
     .collection('docs')
-    .orderBy('date', 'desc')
+    .orderBy('createdAt', 'desc')
     .limit(10)
     .get();
 }
@@ -94,7 +94,7 @@ function postscrollAPI(action) {
   return firebase
     .firestore()
     .collection('docs')
-    .orderBy('date', 'desc')
+    .orderBy('createdAt', 'desc')
     .startAfter(action.data)
     .limit(10)
     .get();
@@ -165,9 +165,19 @@ function postdeleteAPI(action) {
     .delete();
 }
 
+function postdeleteAPI2(action) {
+  // console.log(action);
+  return firebase
+    .firestore()
+    .collection('docs')
+    .doc(`${action}/content/last`)
+    .delete();
+}
+
 function* postdelete(action) {
   try {
     yield call(postdeleteAPI, action.data);
+    yield call(postdeleteAPI2, action.data);
   } catch (e) {
     console.log(e);
   }

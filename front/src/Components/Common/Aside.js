@@ -74,8 +74,7 @@ const AsideBox = styled.aside`
     } */
   }
   .tag_box span.txt {
-    font-size: 14px;
-    margin-top: 5px;
+    font-size: 1rem;
   }
 `;
 
